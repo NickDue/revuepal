@@ -5,6 +5,7 @@ import Leaderboards from '../views/LeaderboardsPage'
 import Train from '../views/TrainPage'
 import Register from '../views/RegisterPage'
 import Login from '../views/LoginPage'
+import User from '../views/UserPage'
 
 const routes = [
     {
@@ -36,6 +37,12 @@ const routes = [
         path: '/register',
         name: 'Register',
         component: Register
+    },
+    {
+        path: '/user/:username?',
+        name: 'User',
+        component: User,
+        props: true
     }
 ]
 
