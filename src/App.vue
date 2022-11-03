@@ -1,13 +1,17 @@
 <template>
-  <NavBar/>
+  <NavBar :is-logged-in="true"/>
   <router-view></router-view>
 </template>
 
 <script>
 import NavBar from "@/components/Navigation/NavBar";
-
 export default {
   name: 'App',
+  data() {
+    return {
+      isLoggedIn: false
+    }
+  },
   components: {
     NavBar
   }

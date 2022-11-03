@@ -1,25 +1,23 @@
 <template>
-  <div class="itemContainer">
-    <router-link :to="{path: route}" class="link">{{name}}</router-link>
+  <div class="container">
+    <router-link to="/login" class="link" id="loginButton">Login</router-link>
+    <router-link to="/register" class="link">Register</router-link>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'NavbarItem',
-  props: {
-    name: String,
-    route: String
-  }
+  name: 'LoggedOut'
 }
 
 </script>
 
 <style scoped>
-.itemContainer {
+.container {
   display: flex;
+  justify-content: center;
   align-items: center;
-  align-content: flex-end;
+  margin-left: auto;
 }
 
 .link {
@@ -37,5 +35,8 @@ export default {
   background-color: aliceblue;
 }
 
+#loginButton {
+  border-left: 1px solid black;
+}
 
 </style>

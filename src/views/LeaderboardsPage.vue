@@ -1,0 +1,3 @@
+<template>
+  U SUCK!
+</template>
