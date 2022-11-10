@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import TaskWindow from "@/components/Tasks/TaskWindow";
+import TaskWindow from "@/components/Home/TaskWindow";
 export default {
   name: 'HomePage',
   components: {

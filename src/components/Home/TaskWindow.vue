@@ -14,10 +14,10 @@
     </div>
     <div class="button-container">
       <button class="simple-button train">
-        <router-link :to="'/task/'+currentTask" >Train</router-link>
+        <router-link :to="'/task/'+currentTask" class="fa-solid fa-wave-square">Train</router-link>
       </button>
       <button class="simple-button train">
-        Skip
+        <i class="fa-solid fa-forward">Skip</i>
       </button>
     </div>
   </div>
@@ -61,7 +61,7 @@ export default {
 .simple-button {
   border: 2px solid #d2bdff;
   height: 30px;
-  width: 50px;
+  width: 80px;
   border-radius: 4px;
   position: relative;
   cursor: pointer;
@@ -72,6 +72,7 @@ export default {
   display: flex;
   justify-content: flex-start;
   margin-top: 10px;
+  padding-top: 90px;
 }
 
 .task-header {
