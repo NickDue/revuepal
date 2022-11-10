@@ -1,6 +1,6 @@
 <template>
   <td class="rankItem">{{rank}}</td>
-  <td class="usernameItem">{{ username }}</td>
+  <td class="usernameItem"><router-link :to="'/user/' + username">{{username}}</router-link></td>
   <td class="scoreItem">{{ score }}</td>
   <td class="completedItem">{{ completed }}</td>
 </template>

@@ -43,6 +43,12 @@ const routes = [
         name: 'User',
         component: User,
         props: true
+    },
+    {
+        path: '/task/:taskid?',
+        name: 'Task',
+        component: Train,
+        props: true
     }
 ]
 
