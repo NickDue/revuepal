@@ -8,7 +8,7 @@ class Node {
         this.text = '';
     }
 
-    clostsPointOnCircle(x, y){
+    closestPointOnCircle(x, y){
         var dx = x - this.x;
         var dy = y - this.y;
         var scale = Math.sqrt(dx * dx + dy * dy);
@@ -35,7 +35,7 @@ class Node {
     draw(context) {
         context.fillStyle = "#000000";
         context.beginPath();
-        context.arc(this.x, this.y, 10, 0, 2*Math.PI, false);
+        context.arc(this.x, this.y, this.radius, 0, 2*Math.PI, false);
         context.stroke();
     }
 }
