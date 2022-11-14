@@ -24,7 +24,7 @@ class StartLink {
         if(Math.abs(this.deltaY) < 6) {
             this.deltaY = 0;
         }
-    };
+    }
 
     getEndPoints () {
         let startX = this.node.x + this.deltaX;
@@ -36,7 +36,7 @@ class StartLink {
             'endX': end.x,
             'endY': end.y,
         };
-    };
+    }
 
     draw (c) {
         var stuff = this.getEndPoints();
@@ -53,7 +53,7 @@ class StartLink {
 
         // draw the head of the arrow
         this.utils.drawArrow(c, stuff.endX, stuff.endY, Math.atan2(-this.deltaY, -this.deltaX));
-    };
+    }
 
     containsPoint (x, y) {
         let stuff = this.getEndPoints();
@@ -63,7 +63,7 @@ class StartLink {
         let percent = (dx * (x - stuff.startX) + dy * (y - stuff.startY)) / (length * length);
         let distance = (dx * (y - stuff.startY) - dy * (x - stuff.startX)) / length;
         return (percent > 0 && percent < 1 && Math.abs(distance) < 6);
-    };
+    }
 }
 
 export default StartLink
