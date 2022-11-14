@@ -4,7 +4,8 @@ class TemporaryLink {
     constructor(from, to) {
         this.from = from;
         this.to = to;
-        this.utils = new Utils()
+        this.utils = new Utils();
+        this.nails = [];
     }
 
     draw(c) {

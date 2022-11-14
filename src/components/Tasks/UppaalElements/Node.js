@@ -9,9 +9,9 @@ class Node {
     }
 
     closestPointOnCircle(x, y){
-        var dx = x - this.x;
-        var dy = y - this.y;
-        var scale = Math.sqrt(dx * dx + dy * dy);
+        let dx = x - this.x;
+        let dy = y - this.y;
+        let scale = Math.sqrt(dx * dx + dy * dy);
         return {
             'x': this.x + dx * this.radius / scale,
             'y': this.y + dy * this.radius / scale,

@@ -6,7 +6,8 @@ class StartLink {
         this.deltaX = 0;
         this.deltaY = 0;
         this.text = '';
-        this.utils = new Utils()
+        this.utils = new Utils();
+        this.nails = [];
 
         if(start){
             this.setAnchorPoint(start.x, start.y)

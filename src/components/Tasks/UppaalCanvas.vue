@@ -1,6 +1,6 @@
 <template>
   <div class="canvas-container">
-    <canvas id="myCanvas" width="1000" height="550" @dblclick="doubleClickHandler" @mousedown="handleMouseDown" @mousemove="handleMouseMove" @mouseup="handleMouseUp">
+    <canvas id="myCanvas" width="1000" height="550" @keydown="handleKeyDown" @keyup="handleKeyUp" tabindex="1" @click="handleLeftClick" @mousemove="handleMouseMove">
     </canvas>
   </div>
 </template>
@@ -11,6 +11,7 @@ import CanvasUtils from "@/components/Tasks/UppaalElements/Utils";
 import TemporaryLink from "@/components/Tasks/UppaalElements/TemporaryLink";
 import StartLink from "@/components/Tasks/UppaalElements/StartLink";
 import Link from "@/components/Tasks/UppaalElements/Link";
+import Nail from "@/components/Tasks/UppaalElements/Nail";
 export default {
   name: 'UppaalCanvas',
   data() {
@@ -23,7 +24,9 @@ export default {
       currentLink: null,
       selectedObject: null,
       originalClick: null,
-      movingObject: false
+      movingObject: false,
+      altDown: false,
+      nails: []
     }
   },
   mounted() {
@@ -32,28 +35,54 @@ export default {
     this.utils = new CanvasUtils()
   },
   methods: {
-    doubleClickHandler(e) {
-      let mouse = this.utils.crossBrowserRelativeMousePos(e)
-      this.selectedObject = this.utils.selectObject(mouse.x, mouse.y, this.nodes, this.links)
-      if (this.selectedObject == null) {
-        this.nodes.push(new Node(mouse.x, mouse.y, 18))
-        this.drawCanvas()
-      }
-      this.selectedObject = null
+    handleKeyDown(e) {
+      if (e.altKey)
+        this.altDown = true
     },
-    handleMouseDown(e){
+    handleKeyUp(e) {
+      if (e.keyCode === 18) // 18 = altKey
+        this.altDown = false
+    },
+    handleLeftClick(e) {
       let mouse = this.utils.crossBrowserRelativeMousePos(e)
-      this.originalClick = mouse
       this.selectedObject = this.utils.selectObject(mouse.x, mouse.y, this.nodes, this.links)
-      if (this.selectedObject != null) {
-        this.currentLink = new TemporaryLink(mouse, mouse)
+      if (this.altDown && this.currentLink == null){
+        if (this.selectedObject == null) {
+          this.nodes.push(new Node(mouse.x, mouse.y, 18))
+        } else {
+          console.log("here")
+          this.originalClick = mouse
+          this.selectedObject = this.utils.selectObject(mouse.x, mouse.y, this.nodes, this.links)
+          if (this.selectedObject != null) {
+            this.currentLink = new TemporaryLink(mouse, mouse)
+          }
+        }
+      } else {
+        if (this.selectedObject != null) {
+          //this.movingObject = false;
+
+          if(this.currentLink != null) {
+            if(!(this.currentLink instanceof TemporaryLink)) {
+              this.selectedObject = this.currentLink;
+              this.currentLink.nails = this.nails
+              this.links.push(this.currentLink);
+            }
+            this.currentLink = null;
+          }
+        } else {
+          if (this.currentLink != null) {
+            let nail = new Nail(mouse.x, mouse.y, 5)
+            this.nails.push(nail)
+          }
+        }
       }
+      this.drawCanvas()
     },
     handleMouseMove(e) {
       let mouse = this.utils.crossBrowserRelativeMousePos(e);
 
       if(this.currentLink != null) {
-        var targetNode = this.utils.selectObject(mouse.x, mouse.y, this.nodes, this.links);
+        let targetNode = this.utils.selectObject(mouse.x, mouse.y, this.nodes, this.links);
         if(!(targetNode instanceof Node)) {
           targetNode = null;
         }
@@ -65,34 +94,19 @@ export default {
             this.currentLink = new TemporaryLink(this.originalClick, mouse);
           }
         } else {
-          if(targetNode == this.selectedObject) {
-            //this.currentLink = new SelfLink(this.selectedObject, mouse);
-          } else if(targetNode != null) {
+          if(targetNode != null) {
             this.currentLink = new Link(this.selectedObject, targetNode);
           } else {
             this.currentLink = new TemporaryLink(this.selectedObject.closestPointOnCircle(mouse.x, mouse.y), mouse);
+            this.originalClick = this.selectedObject.closestPointOnCircle(mouse.x, mouse.y)
           }
         }
-        this.drawCanvas();
-      }
-    },
-    handleMouseUp(e) {
-      e.preventDefault()
-      this.movingObject = false;
-
-      if(this.currentLink != null) {
-        if(!(this.currentLink instanceof TemporaryLink)) {
-          this.selectedObject = this.currentLink;
-          this.links.push(this.currentLink);
-        }
-        this.currentLink = null;
         this.drawCanvas();
       }
     },
     drawCanvas() {
       this.context.clearRect(0,0, this.canvas.width, this.canvas.height);
       this.context.save();
-
       for(let i = 0; i < this.nodes.length; i++) {
         this.context.lineWidth = 1;
         this.context.fillStyle = this.context.strokeStyle = 'blue';
@@ -100,14 +114,18 @@ export default {
       }
       for(let i = 0; i < this.links.length; i++) {
         this.context.lineWidth = 1;
-        this.context.fillStyle = this.context.strokeStyle = (this.links[i] == this.selectedObject) ? 'blue' : 'black';
+        this.context.fillStyle = this.context.strokeStyle = (this.links[i] === this.selectedObject) ? 'blue' : 'black';
         this.links[i].draw(this.context);
+        for(let j = 0; j < this.links[i].nails.length; j++) {
+          this.links[i].nails[j].draw(this.context)
+        }
       }
       if(this.currentLink != null) {
         this.context.lineWidth = 1;
         this.context.fillStyle = this.context.strokeStyle = 'black';
         this.currentLink.draw(this.context);
       }
+
 
       this.context.restore();
     }

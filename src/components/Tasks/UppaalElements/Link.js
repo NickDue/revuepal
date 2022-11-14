@@ -9,6 +9,7 @@ class Link {
         this.parallelPart = 0.5; // percentage from nodeA to nodeB
         this.perpendicularPart = 0; // pixels from line between nodeA and nodeB
         this.utils = new Utils()
+        this.nails = []
     }
 
     getAnchorPoint () {
