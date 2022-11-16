@@ -11,7 +11,7 @@ import CanvasUtils from "@/components/Tasks/UppaalElements/Utils";
 import TemporaryLink from "@/components/Tasks/UppaalElements/TemporaryLink";
 import StartLink from "@/components/Tasks/UppaalElements/StartLink";
 import Link from "@/components/Tasks/UppaalElements/Link";
-import Nail from "@/components/Tasks/UppaalElements/Nail";
+import SelfLink from "@/components/Tasks/UppaalElements/SelfLink";
 export default {
   name: 'UppaalCanvas',
   data() {
@@ -26,7 +26,9 @@ export default {
       originalClick: null,
       movingObject: false,
       altDown: false,
-      nails: []
+      nodeIdentifier: 0,
+      linkIdentifier: 0,
+      targetNode: null
     }
   },
   mounted() {
@@ -38,6 +40,34 @@ export default {
     handleKeyDown(e) {
       if (e.altKey)
         this.altDown = true
+      if (e.keyCode === 27) {
+        this.currentLink = null;
+        this.selectedObject = null;
+        this.drawCanvas()
+      }
+      if (e.keyCode === 8 && this.selectedObject != null){
+        e.preventDefault()
+        if (this.selectedObject instanceof Node) {
+          let newNodes = []
+          let newLinks = []
+          for (let i = 0; i < this.nodes.length; i++) {
+            if (this.nodes[i].identifier !== this.selectedObject.identifier)
+              newNodes.push(this.nodes[i])
+          }
+          for (let i = 0; i < this.links.length; i++) {
+            if (this.links[i].to !== this.selectedObject.identifier.toString() && this.links[i].from !== this.selectedObject.identifier.toString())
+              newLinks.push(this.links[i])
+          }
+          this.nodes = newNodes
+          this.links = newLinks
+        } else if (this.selectedObject instanceof Link || this.selectedObject instanceof SelfLink){
+          let newLinks = []
+
+          this.links = newLinks
+        }
+      }
+      this.drawCanvas()
+      console.log(e.keyCode)
     },
     handleKeyUp(e) {
       if (e.keyCode === 18) // 18 = altKey
@@ -48,31 +78,24 @@ export default {
       this.selectedObject = this.utils.selectObject(mouse.x, mouse.y, this.nodes, this.links)
       if (this.altDown && this.currentLink == null){
         if (this.selectedObject == null) {
-          this.nodes.push(new Node(mouse.x, mouse.y, 18))
+          this.nodes.push(new Node(mouse.x, mouse.y, 18, this.nodeIdentifier))
+          this.nodeIdentifier++
         } else {
-          console.log("here")
           this.originalClick = mouse
           this.selectedObject = this.utils.selectObject(mouse.x, mouse.y, this.nodes, this.links)
-          if (this.selectedObject != null) {
-            this.currentLink = new TemporaryLink(mouse, mouse)
-          }
+          this.currentLink = new TemporaryLink(mouse, mouse)
         }
       } else {
         if (this.selectedObject != null) {
           //this.movingObject = false;
 
           if(this.currentLink != null) {
-            if(!(this.currentLink instanceof TemporaryLink)) {
-              this.selectedObject = this.currentLink;
-              this.currentLink.nails = this.nails
+            if(!(this.currentLink instanceof TemporaryLink) && this.targetNode != null) {
               this.links.push(this.currentLink);
+              for (let i = 0; i < this.links.length; i++)
+                console.log("" + this.currentLink.to + " " + this.currentLink.from)
             }
             this.currentLink = null;
-          }
-        } else {
-          if (this.currentLink != null) {
-            let nail = new Nail(mouse.x, mouse.y, 5)
-            this.nails.push(nail)
           }
         }
       }
@@ -82,20 +105,25 @@ export default {
       let mouse = this.utils.crossBrowserRelativeMousePos(e);
 
       if(this.currentLink != null) {
-        let targetNode = this.utils.selectObject(mouse.x, mouse.y, this.nodes, this.links);
-        if(!(targetNode instanceof Node)) {
-          targetNode = null;
+        this.targetNode = this.utils.selectObject(mouse.x, mouse.y, this.nodes, this.links);
+        if(!(this.targetNode instanceof Node)) {
+          this.targetNode = null;
         }
 
         if(this.selectedObject == null) {
-          if(targetNode != null) {
-            this.currentLink = new StartLink(targetNode, this.originalClick);
+          if(this.targetNode != null) {
+            this.currentLink = new StartLink(this.targetNode, this.originalClick, this.linkIdentifier);
+            this.linkIdentifier++
           } else {
             this.currentLink = new TemporaryLink(this.originalClick, mouse);
           }
         } else {
-          if(targetNode != null) {
-            this.currentLink = new Link(this.selectedObject, targetNode);
+          if (this.targetNode === this.selectedObject) {
+            this.currentLink = new SelfLink(this.selectedObject, mouse, 18, this.linkIdentifier)
+            this.linkIdentifier++
+          } else if(this.targetNode != null) {
+            this.currentLink = new Link(this.selectedObject, this.targetNode, this.linkIdentifier);
+            this.linkIdentifier++
           } else {
             this.currentLink = new TemporaryLink(this.selectedObject.closestPointOnCircle(mouse.x, mouse.y), mouse);
             this.originalClick = this.selectedObject.closestPointOnCircle(mouse.x, mouse.y)
@@ -116,9 +144,6 @@ export default {
         this.context.lineWidth = 1;
         this.context.fillStyle = this.context.strokeStyle = (this.links[i] === this.selectedObject) ? 'blue' : 'black';
         this.links[i].draw(this.context);
-        for(let j = 0; j < this.links[i].nails.length; j++) {
-          this.links[i].nails[j].draw(this.context)
-        }
       }
       if(this.currentLink != null) {
         this.context.lineWidth = 1;

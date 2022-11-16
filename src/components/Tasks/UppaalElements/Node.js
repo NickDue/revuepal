@@ -1,11 +1,13 @@
 class Node {
-    constructor(x, y, radius) {
+    constructor(x, y, radius, id) {
         this.x = x;
         this.y = y;
         this.radius = radius
         this.mouseOffsetX = 0;
         this.mouseOffsetY = 0;
         this.text = '';
+        this.identifier = id;
+        this.color ="#000000";
     }
 
     closestPointOnCircle(x, y){
@@ -33,7 +35,7 @@ class Node {
     }
 
     draw(context) {
-        context.fillStyle = "#000000";
+        context.fillStyle = this.color;
         context.beginPath();
         context.arc(this.x, this.y, this.radius, 0, 2*Math.PI, false);
         context.stroke();

@@ -1,7 +1,7 @@
 import Utils from "@/components/Tasks/UppaalElements/Utils";
 
 class Link {
-    constructor(a, b) {
+    constructor(a, b, identifier) {
         this.nodeA = a;
         this.nodeB = b;
         this.text = '';
@@ -9,7 +9,9 @@ class Link {
         this.parallelPart = 0.5; // percentage from nodeA to nodeB
         this.perpendicularPart = 0; // pixels from line between nodeA and nodeB
         this.utils = new Utils()
-        this.nails = []
+        this.to = this.nodeA.identifier.toString()
+        this.from = this.nodeB.identifier.toString()
+        this.identifier = identifier.toString()
     }
 
     getAnchorPoint () {
