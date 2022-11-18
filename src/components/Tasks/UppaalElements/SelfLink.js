@@ -5,12 +5,15 @@ class SelfLink {
         this.node = node;
         this.anchorAngle = 0;
         this.mouseOffsetAngle = 0;
-        this.text = '';
         this.radius = radius
         this.utils = new Utils()
         this.to = this.node.identifier.toString()
-        this.to = this.node.identifier.toString()
-        this.identifier = identifier.toString()
+        this.from = this.node.identifier.toString()
+        this.identifier = identifier.toString();
+        this.select = "";
+        this.guard = "";
+        this.sync = "";
+        this.update = ""
 
         if(mouse) {
             this.setAnchorPoint(mouse.x, mouse.y);

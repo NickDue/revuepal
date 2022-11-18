@@ -4,14 +4,17 @@ class Link {
     constructor(a, b, identifier) {
         this.nodeA = a;
         this.nodeB = b;
-        this.text = '';
         this.lineAngleAdjust = 0; // value to add to textAngle when link is straight line
         this.parallelPart = 0.5; // percentage from nodeA to nodeB
         this.perpendicularPart = 0; // pixels from line between nodeA and nodeB
         this.utils = new Utils()
-        this.to = this.nodeA.identifier.toString()
-        this.from = this.nodeB.identifier.toString()
+        this.from = this.nodeA.identifier.toString()
+        this.to = this.nodeB.identifier.toString()
         this.identifier = identifier.toString()
+        this.select = "";
+        this.guard = "";
+        this.sync = "";
+        this.update = ""
     }
 
     getAnchorPoint () {
@@ -94,6 +97,14 @@ class Link {
         } else {
             this.utils.drawArrow(c, stuff.endX, stuff.endY, Math.atan2(stuff.endY - stuff.startY, stuff.endX - stuff.startX));
         }
+
+        // draw the text
+        let textX = (stuff.startX + stuff.endX) / 2;
+        let textY = (stuff.startY + stuff.endY) / 2;
+        let textAngle = Math.atan2(stuff.endX - stuff.startX, stuff.startY - stuff.endY);
+        this.drawText(c, this.select, textX, textY, textAngle + this.lineAngleAdjust,  textY-5);
+
+
     }
 
     containsPoint(x, y) {
@@ -130,6 +141,31 @@ class Link {
             return (percent > 0 && percent < 1 && Math.abs(distance) < 6);
         }
         return false;
+    }
+
+    drawText(c, originalText, x, y, angleOrNull, placement) {
+        c.font = '15px "Times New Roman", serif';
+        let width = c.measureText(originalText).width;
+
+        // center the text
+        x -= width / 2;
+
+        // position the text intelligently if given an angle
+        if(angleOrNull != null) {
+            let cos = Math.cos(angleOrNull);
+            let sin = Math.sin(angleOrNull);
+            let cornerPointX = (width / 2 + 5) * (cos > 0 ? 1 : -1);
+            let cornerPointY = (10 + 5) * (sin > 0 ? 1 : -1);
+            let slide = sin * Math.pow(Math.abs(sin), 40) * cornerPointX - cos * Math.pow(Math.abs(cos), 10) * cornerPointY;
+            x += cornerPointX - sin * slide;
+            y += cornerPointY + cos * slide;
+        }
+
+        // draw text and caret (round the coordinates so the caret falls on a pixel)
+
+        x = Math.round(x);
+        c.fillText(originalText, x, placement);
+
     }
 }
 

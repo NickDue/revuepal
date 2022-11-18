@@ -5,9 +5,14 @@ class Node {
         this.radius = radius
         this.mouseOffsetX = 0;
         this.mouseOffsetY = 0;
-        this.text = '';
         this.identifier = id;
         this.color ="#000000";
+        this.name = '';
+        this.invariant = []
+        this.exponential = ''
+        this.initial = false;
+        this.urgent = false;
+        this.committed = false;
     }
 
     closestPointOnCircle(x, y){
@@ -37,8 +42,55 @@ class Node {
     draw(context) {
         context.fillStyle = this.color;
         context.beginPath();
+        //context.strokeStyle = this.color
         context.arc(this.x, this.y, this.radius, 0, 2*Math.PI, false);
         context.stroke();
+
+        this.drawText(context, this.name, this.x, this.y, null, Math.round(this.y) - this.radius - 3);
+        this.drawText(context, this.invariant, this.x, this.y, null, Math.round(this.y) + this.radius + 10);
+
+        if(this.initial) {
+            context.beginPath();
+            context.arc(this.x, this.y, this.radius - 6, 0, 2 * Math.PI, false);
+            context.stroke();
+        }
+
+        if(this.urgent) {
+            context.beginPath();
+            context.arc(this.x, this.y, this.radius - 12, 0,  Math.PI, false);
+            context.stroke();
+        }
+
+        if(this.committed) {
+            context.beginPath();
+            context.arc(this.x, this.y, this.radius - 18, 0.5*Math.PI,  1.5*Math.PI, false);
+            context.stroke();
+        }
+    }
+
+    drawText(c, originalText, x, y, angleOrNull, placement) {
+        c.font = '15px "Times New Roman", serif';
+        let width = c.measureText(originalText).width;
+
+        // center the text
+        x -= width / 2;
+
+        // position the text intelligently if given an angle
+        if(angleOrNull != null) {
+            let cos = Math.cos(angleOrNull);
+            let sin = Math.sin(angleOrNull);
+            let cornerPointX = (width / 2 + 5) * (cos > 0 ? 1 : -1);
+            let cornerPointY = (10 + 5) * (sin > 0 ? 1 : -1);
+            let slide = sin * Math.pow(Math.abs(sin), 40) * cornerPointX - cos * Math.pow(Math.abs(cos), 10) * cornerPointY;
+            x += cornerPointX - sin * slide;
+            y += cornerPointY + cos * slide;
+        }
+
+        // draw text and caret (round the coordinates so the caret falls on a pixel)
+
+        x = Math.round(x);
+        c.fillText(originalText, x, placement);
+
     }
 }
 
