@@ -1,13 +1,13 @@
 <template>
   <div class="profile-container">
     <div class="sidebar-container">
-      <ProfileCard :username=username />
+      <ProfileCard :username=username :title=title :created-at=createdAt />
     </div>
     <div class="content-divider"></div>
     <div class="main-content-container">
       <ContentCard
         title="About me"
-        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        :content=about
       />
     </div>
   </div>
@@ -17,12 +17,31 @@
 import ProfileCard from "@/components/Personal/Sidebar/ProfileCard";
 import ContentCard from "@/components/Personal/Content/ContentCard";
   export default {
+    data() {
+      return {
+        title: '',
+        createdAt: '',
+        about: ''
+      }
+    },
     props: {
       username: String
     },
     components: {
       ProfileCard,
       ContentCard
+    },
+    async created() {
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: this.username })
+      };
+      const response = await fetch("/data-access/get-user-info", requestOptions);
+      const data = await response.json();
+      this.about = data.about;
+      this.createdAt = data.createdAt
+      this.title = data.title
     }
   }
 </script>

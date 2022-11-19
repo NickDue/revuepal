@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="profile-header">
-      <ProfileHeader :username="username" title="Some title"/>
+      <ProfileHeader :username="username" :title=title />
     </div>
     <div class="stats-main">
       <StatField stat-name="Total Score" stat-value="2000"/>
       <StatField stat-name="Achievements" stat-value="2"/>
       <StatField stat-name="# Completed" stat-value="20"/>
-      <StatField stat-name="Created" stat-value="2 july 2022"/>
+      <StatField stat-name="Created" :stat-value=createdAt />
     </div>
     <div class="socials-panel">
       <OtherSocials
@@ -28,7 +28,9 @@ import OtherSocials from "@/components/Personal/Sidebar/OtherSocials";
 export default {
   name: 'ProfileCard',
   props: {
-    username: String
+    username: String,
+    title: String,
+    createdAt: String,
   },
   components: {
     StatField,
