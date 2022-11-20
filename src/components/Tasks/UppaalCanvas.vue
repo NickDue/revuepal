@@ -78,6 +78,10 @@
       </div>
     </div>
   </div>
+  <div class="button-container">
+    <TaskButton icon="fa-solid fa-check" text="Submit" @click="submitXml"/>
+    <TaskButton icon="fa-solid fa-forward" text="Skip" />
+  </div>
 </template>
 
 <script>
@@ -87,6 +91,7 @@ import TemporaryLink from "@/components/Tasks/UppaalElements/TemporaryLink";
 import StartLink from "@/components/Tasks/UppaalElements/StartLink";
 import Link from "@/components/Tasks/UppaalElements/Link";
 import SelfLink from "@/components/Tasks/UppaalElements/SelfLink";
+import TaskButton from "@/components/Tasks/TaskButton";
 export default {
   name: 'UppaalCanvas',
   data() {
@@ -116,6 +121,9 @@ export default {
       sync: '',
       update: ''
     }
+  },
+  components: {
+    TaskButton
   },
   mounted() {
     this.canvas = document.getElementById("myCanvas");
@@ -212,7 +220,7 @@ export default {
           }
         } else {
           if (this.targetNode === this.selectedObject) {
-            this.currentLink = new SelfLink(this.selectedObject, mouse, 18, this.linkIdentifier)
+            this.currentLink = new SelfLink(this.selectedObject, mouse, 25, this.linkIdentifier)
             this.linkIdentifier++
           } else if(this.targetNode != null) {
             this.currentLink = new Link(this.selectedObject, this.targetNode, this.linkIdentifier);
@@ -302,8 +310,42 @@ export default {
         this.urgent = this.selectedObject.urgent
         this.committed = this.selectedObject.committed
       }
+    },
 
+    submitXml() {
+      let convertedXML = '<?xml version="1.0" encoding="utf-8"?>\n'
+      convertedXML += "<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>\n"
+      convertedXML += "<nta>\n" +
+          "<declaration>// Place global declarations here.</declaration>\n" +
+          "<template>\n" +
+          "<name x=\"5\" y=\"5\">Template</name>\n" +
+          "<declaration>// Place local declarations here.</declaration> \n"
+      for (let i = 0; i < this.nodes.length; i++) {
+        convertedXML += this.nodes[i].convertToXML()
+      }
+      for (let i = 0; i < this.nodes.length; i++) {
+        if (this.nodes[i].initial){
+          convertedXML += `<init ref="id${this.nodes[i].identifier}"/>`
+        }
+      }
+      for (let i = 0; i < this.links.length; i++) {
+        convertedXML += this.links[i].convertToXML()
+      }
 
+      convertedXML += "</template><system>// Place template instantiations here.\n" +
+          "Process = Template();\n" +
+          "// List one or more processes to be composed into a system.\n" +
+          "system Process;\n" +
+          "    </system>\n" +
+          "\t<queries>\n" +
+          "\t\t<query>\n" +
+          "\t\t\t<formula></formula>\n" +
+          "\t\t\t<comment></comment>\n" +
+          "\t\t</query>\n" +
+          "\t</queries>\n" +
+          "</nta>"
+
+      console.log(convertedXML)
     }
   }
 }
@@ -374,6 +416,12 @@ h5 {
 
 button {
   margin: 2%;
+}
+
+.button-container {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
 }
 
 </style>

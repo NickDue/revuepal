@@ -8,7 +8,7 @@ class Node {
         this.identifier = id;
         this.color ="#000000";
         this.name = '';
-        this.invariant = []
+        this.invariant = ""
         this.exponential = ''
         this.initial = false;
         this.urgent = false;
@@ -86,11 +86,25 @@ class Node {
             y += cornerPointY + cos * slide;
         }
 
-        // draw text and caret (round the coordinates so the caret falls on a pixel)
-
         x = Math.round(x);
         c.fillText(originalText, x, placement);
+    }
 
+    convertToXML () {
+        let all = `<location id="id${this.identifier}" x="${this.x}" y="${this.y}">`
+        if (this.name !== "")
+            all += `<name x="${this.x}" y="${Math.round(this.y) - this.radius - 3}">${this.name}</name>`;
+        if (this.invariant !== "")
+            all += `<label kind="invariant" x="${this.x}" y="${Math.round(this.y) + this.radius + 10}">${this.invariant}</label>`
+        if (this.exponential !== "")
+            all += `<label kind="exponentialrate" x="${this.x}" y="${Math.round(this.y) + this.radius + 10}">${this.exponential}</label>`
+        if (this.urgent)
+            all += "<urgent/>"
+        if (this.committed)
+            all += "<committed/>"
+        all += "</location>"
+
+        return all
     }
 }
 

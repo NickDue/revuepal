@@ -15,6 +15,7 @@ class Link {
         this.guard = "";
         this.sync = "";
         this.update = ""
+        this.x = 0
     }
 
     getAnchorPoint () {
@@ -100,9 +101,9 @@ class Link {
 
         // draw the text
         let textX = (stuff.startX + stuff.endX) / 2;
-        let textY = (stuff.startY + stuff.endY) / 2;
+        this.textY = (stuff.startY + stuff.endY) / 2;
         let textAngle = Math.atan2(stuff.endX - stuff.startX, stuff.startY - stuff.endY);
-        this.drawText(c, this.select, textX, textY, textAngle + this.lineAngleAdjust,  textY-5);
+        this.drawText(c, this.guard, textX, this.textY, textAngle + this.lineAngleAdjust,  this.textY-5);
 
 
     }
@@ -163,9 +164,25 @@ class Link {
 
         // draw text and caret (round the coordinates so the caret falls on a pixel)
 
-        x = Math.round(x);
-        c.fillText(originalText, x, placement);
+        this.x = Math.round(x);
+        c.fillText(originalText, this.x, placement);
+    }
 
+    convertToXML() {
+        let all = "<transition>"
+        all += `<source ref="id${this.from}"/>`
+        all += `<target ref="id${this.to}"/>`
+        if (this.select !== "")
+            all += `<label kind="select" x="${this.x}" y="${this.textY-5}">${this.select}</label>`
+        if (this.guard !== "")
+            all += `<label kind="guard" x="${this.x}" y="${this.textY-5}">${this.guard}</label>`
+        if (this.sync !== "")
+            all += `<label kind="synchronisation" x="${this.x}" y="${this.textY-5}">${this.sync}</label>`
+        if (this.update !== "")
+            all += `<label kind="assignment" x="${this.x}" y="${this.textY-5}">${this.update}</label>`
+        all += "</transition>"
+
+        return all
     }
 }
 

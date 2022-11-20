@@ -66,14 +66,42 @@ class SelfLink {
         c.stroke();
         // draw the head of the arrow
         this.utils.drawArrow(c, stuff.endX, stuff.endY, stuff.endAngle + Math.PI * 0.4);
+        let textX = stuff.circleX + stuff.circleRadius * Math.cos(this.anchorAngle);
+        let textY = stuff.circleY + stuff.circleRadius * Math.sin(this.anchorAngle);
+        this.drawText(c, this.guard, textX, textY, this.anchorAngle, textY-5);
     }
 
     containsPoint(x, y){
-        var stuff = this.getEndPointsAndCircle();
-        var dx = x - stuff.circleX;
-        var dy = y - stuff.circleY;
-        var distance = Math.sqrt(dx*dx + dy*dy) - stuff.circleRadius;
+        let stuff = this.getEndPointsAndCircle();
+        let dx = x - stuff.circleX;
+        let dy = y - stuff.circleY;
+        let distance = Math.sqrt(dx*dx + dy*dy) - stuff.circleRadius;
         return (Math.abs(distance) < 6);
+    }
+
+    drawText(c, originalText, x, y, angleOrNull, placement) {
+        c.font = '15px "Times New Roman", serif';
+        let width = c.measureText(originalText).width;
+
+        // center the text
+        x -= width / 2;
+
+        // position the text intelligently if given an angle
+        if(angleOrNull != null) {
+            let cos = Math.cos(angleOrNull);
+            let sin = Math.sin(angleOrNull);
+            let cornerPointX = (width / 2 + 5) * (cos > 0 ? 1 : -1);
+            let cornerPointY = (10 + 5) * (sin > 0 ? 1 : -1);
+            let slide = sin * Math.pow(Math.abs(sin), 40) * cornerPointX - cos * Math.pow(Math.abs(cos), 10) * cornerPointY;
+            x += cornerPointX - sin * slide;
+            y += cornerPointY + cos * slide;
+        }
+
+        // draw text and caret (round the coordinates so the caret falls on a pixel)
+
+        x = Math.round(x);
+        c.fillText(originalText, x, placement);
+
     }
 }
 

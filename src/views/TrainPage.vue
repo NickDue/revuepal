@@ -9,16 +9,12 @@
     <div>
       <UppaalCanvas />
     </div>
-    <div>
-      <TaskButtons />
-    </div>
   </div>
 </template>
 
 <script>
 import TaskDescription from "@/components/Tasks/TaskDescription";
 import UppaalCanvas from "@/components/Tasks/UppaalCanvas";
-import TaskButtons from "@/components/Tasks/TaskButtons";
 export default {
   name: 'TaskPage',
   props: {
@@ -27,7 +23,6 @@ export default {
   components: {
     TaskDescription,
     UppaalCanvas,
-    TaskButtons
   }
 }
 

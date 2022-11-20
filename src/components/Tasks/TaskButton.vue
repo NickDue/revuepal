@@ -1,5 +1,5 @@
 <template>
-  <button class="simple-button">
+  <button class="simple-button" @click="$emit('clicked')">
     <i :class=icon>{{ text }}</i>
   </button>
 </template>
