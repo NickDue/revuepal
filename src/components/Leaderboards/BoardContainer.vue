@@ -1,8 +1,8 @@
 <template>
   <table class="scoreboardTable">
     <BoardHeaders />
-    <tr class="scoreboardRegularRow" v-bind:key="item" v-for="item in items">
-      <component :is="item"/>
+    <tr class="scoreboardRegularRow" :key="item" v-for="item in items">
+      <BoardRows rank="1" :username=item score="2" completed="5"/>
     </tr>
   </table>
 </template>
@@ -18,14 +18,21 @@ export default {
   },
   data() {
     return {
-      items: []
+      items: [],
+      rawData: ''
     }
   },
-  mounted() {
-    /* TODO: For-loop here when we can get data from a database */
-    this.items.push(<BoardRows rank="1" username="Nicholas" score="2" completed="5"/>)
-    this.items.push(<BoardRows rank="2" username="Lasse" score="2" completed="5"/>)
-  }
+  async created() {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    };
+    const response = await fetch("/data-access/get-leaderboards", requestOptions);
+    const data = await response.json();
+    for (let x in data) {
+      this.items.push(data[x])
+    }
+  },
 }
 
 </script>

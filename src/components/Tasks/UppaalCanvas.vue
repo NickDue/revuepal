@@ -119,16 +119,35 @@ export default {
       select: '',
       guard: '',
       sync: '',
-      update: ''
+      update: '',
+      chosenExercise: '',
+      exerciseId: 1,
+      convertedExercise: null
     }
   },
   components: {
     TaskButton
   },
+  created() {
+    let parser = new DOMParser()
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: 1 })
+    };
+    fetch("/exercise-provider", requestOptions)
+        .then(response => (response.json()))
+        .then(data => (this.chosenExercise = data))
+        .then(exercise => (this.convertedExercise = parser.parseFromString(exercise.toString(), "application/xml")))
+        .then(converted => console.log(converted.getElementsByTagName("location")[0].getAttribute('id')));
+  },
   mounted() {
     this.canvas = document.getElementById("myCanvas");
     this.context = this.canvas.getContext("2d")
     this.utils = new CanvasUtils()
+  },
+  updated() {
+    console.log(this.convertedExercise)
   },
   methods: {
     handleKeyDown(e) {

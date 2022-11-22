@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1>Welcome back! {Username}</h1>
+    <h1>Welcome back! {{ username }}</h1>
   </div>
   <div class="task-container">
-    <TaskWindow />
+    <TaskWindow :exercise-id=1 />
   </div>
 </template>
 
@@ -13,6 +13,9 @@ export default {
   name: 'HomePage',
   components: {
     TaskWindow
+  },
+  props: {
+    username: String
   }
 }
 

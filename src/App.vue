@@ -1,5 +1,5 @@
 <template>
-  <NavBar :is-logged-in="true"/>
+  <NavBar :is-logged-in="true" username="USER-NAME" />
   <router-view></router-view>
 </template>
 
@@ -9,7 +9,11 @@ export default {
   name: 'App',
   data() {
     return {
-      isLoggedIn: false
+      isLoggedIn: false,
+      username: {
+        type: String,
+        default: "Revuppaal User"
+      }
     }
   },
   components: {

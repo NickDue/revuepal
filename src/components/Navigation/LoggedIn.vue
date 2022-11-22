@@ -1,12 +1,15 @@
 <template>
   <div class="container">
-    <div> Hello Nicholas </div>
+    <div> Hello {{ username }} </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'LoggedIn'
+  name: 'LoggedIn',
+  props: {
+    username: String
+  }
 }
 
 </script>

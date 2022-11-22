@@ -23,11 +23,10 @@
   </div>
   <div class="description-container">
     <div class="description-header">
-      <h4 class="description-header-text">Description</h4>
+      <h4 class="description-header-text">{{ exerciseName }}</h4>
     </div>
     <div class="description-text">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      {{ exerciseDescription }}
     </div>
   </div>
 </template>
@@ -37,8 +36,24 @@ export default {
   name: 'TaskWindow',
   data() {
     return {
-      currentTask: 0
+      currentTask: 0,
+      exerciseName: "",
+      exerciseDescription: ""
     }
+  },
+  props: {
+    exerciseId: Number
+  },
+  async created() {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ex_id: this.exerciseId })
+    };
+    const response = await fetch("/data-access/get-exercise-description", requestOptions);
+    const data = await response.json();
+    this.exerciseDescription = data.description
+    this.exerciseName = data.name
   }
 }
 </script>

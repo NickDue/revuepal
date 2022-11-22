@@ -17,7 +17,7 @@
         route="/about"
     />
     <LoggedOut v-if="isLoggedIn === false"/>
-    <LoggedIn v-if="isLoggedIn === true"/>
+    <LoggedIn v-if="isLoggedIn === true" :username=username />
   </div>
 </template>
 
@@ -31,7 +31,8 @@ export default {
     isLoggedIn: {
       type: Boolean,
       default: true
-    }
+    },
+    username: String
   },
   components: {
     LoggedIn,
