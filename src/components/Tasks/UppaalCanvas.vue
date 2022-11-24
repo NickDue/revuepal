@@ -137,7 +137,7 @@ export default {
     };
     fetch("/exercise-provider", requestOptions)
         .then(response => (response.json()))
-        .then(data => (parser.parseFromString(data.toString(), "application/xml")))
+        .then(data => (parser.parseFromString(data["template"].toString(), "application/xml")))
         .then(converted => this.importElements(converted));
   },
   mounted() {
@@ -194,11 +194,9 @@ export default {
         }
         for (let k = 0; k < this.nodes.length; k++) {
           if (this.nodes[k].identifier === from){
-            console.log("got from")
             from = this.nodes[k]
           }
           if (this.nodes[k].identifier === to){
-            console.log("got to")
             to = this.nodes[k]
           }
         }

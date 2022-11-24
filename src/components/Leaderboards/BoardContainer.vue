@@ -1,8 +1,8 @@
 <template>
   <table class="scoreboardTable">
     <BoardHeaders />
-    <tr class="scoreboardRegularRow" :key="item" v-for="item in items">
-      <BoardRows rank="1" :username=item score="2" completed="5"/>
+    <tr class="scoreboardRegularRow" v-for="item of items" :key="item.name">
+      <BoardRows :rank=item.rank :username=item.name :score=item.xp :completed=item.total />
     </tr>
   </table>
 </template>
@@ -19,20 +19,26 @@ export default {
   data() {
     return {
       items: [],
-      rawData: ''
+      rawData: '',
     }
   },
-  async created() {
+  created() {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
     };
-    const response = await fetch("/data-access/get-leaderboards", requestOptions);
-    const data = await response.json();
-    for (let x in data) {
-      this.items.push(data[x])
-    }
+    fetch("/data-access/get-user-scores", requestOptions)
+        .then(response => (response.json()))
+        .then(data => this.fillItems(data));
+
   },
+  methods: {
+    fillItems(data){
+      for (let x in data) {
+        this.items.push({"rank": x, "name": data[x][0], "xp":data[x][1], "total":data[x][2]})
+      }
+    }
+  }
 }
 
 </script>
