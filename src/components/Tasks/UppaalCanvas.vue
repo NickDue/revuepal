@@ -122,7 +122,7 @@ export default {
       update: '',
       chosenExercise: '',
       exerciseId: 1,
-      convertedExercise: null
+      nodeRadius: 25
     }
   },
   components: {
@@ -137,19 +137,85 @@ export default {
     };
     fetch("/exercise-provider", requestOptions)
         .then(response => (response.json()))
-        .then(data => (this.chosenExercise = data))
-        .then(exercise => (this.convertedExercise = parser.parseFromString(exercise.toString(), "application/xml")))
-        .then(converted => console.log(converted.getElementsByTagName("location")[0].getAttribute('id')));
+        .then(data => (parser.parseFromString(data.toString(), "application/xml")))
+        .then(converted => this.importElements(converted));
   },
   mounted() {
     this.canvas = document.getElementById("myCanvas");
     this.context = this.canvas.getContext("2d")
     this.utils = new CanvasUtils()
   },
-  updated() {
-    console.log(this.convertedExercise)
-  },
   methods: {
+    importElements(elements) {
+      let initialState = ""
+      if (elements.getElementsByTagName("init")[0].getAttribute("ref") !== null) {
+        initialState = elements.getElementsByTagName("init")[0].getAttribute("ref")
+      }
+      for (let i = 0; i < elements.getElementsByTagName("location").length; i++) {
+        let nodeId = elements.getElementsByTagName("location")[i].getAttribute("id")
+        let nodeX = elements.getElementsByTagName("location")[i].getAttribute("x")
+        let nodeY = elements.getElementsByTagName("location")[i].getAttribute("y")
+        const newNode = new Node(parseInt(nodeX)+250, parseInt(nodeY)+250, this.nodeRadius, nodeId)
+        if (nodeId === initialState)
+          newNode.initial = true
+        for (let j = 0; j < elements.getElementsByTagName("location")[i].childNodes.length; j++) {
+          if (elements.getElementsByTagName("location")[i].childNodes[j].nodeName === "name")
+            newNode.name = elements.getElementsByTagName("location")[i].childNodes[j].innerHTML
+          if (elements.getElementsByTagName("location")[i].childNodes[j].nodeName === "label" && elements.getElementsByTagName("location")[i].childNodes[j].getAttribute("kind") === "invariant")
+            newNode.invariant = elements.getElementsByTagName("location")[i].childNodes[j].innerHTML.replace("&gt;", ">").replace("&lt;", "<")
+          if (elements.getElementsByTagName("location")[i].childNodes[j].nodeName === "committed")
+            newNode.committed = true
+          if (elements.getElementsByTagName("location")[i].childNodes[j].nodeName === "urgent")
+            newNode.urgent = true
+        }
+        this.nodes.push(newNode)
+      }
+      this.nodeIdentifier = this.nodes.length
+      for (let i = 0; i < elements.getElementsByTagName("transition").length; i++){
+        let from = null;
+        let to = null;
+        let select = null;
+        let guard = null;
+        let sync = null;
+        let assignment = null;
+        for (let j = 0; j < elements.getElementsByTagName("transition")[i].childNodes.length; j++) {
+          if (elements.getElementsByTagName("transition")[i].childNodes[j].nodeName === "source")
+            from = elements.getElementsByTagName("transition")[i].childNodes[j].getAttribute("ref")
+          if (elements.getElementsByTagName("transition")[i].childNodes[j].nodeName === "target")
+            to = elements.getElementsByTagName("transition")[i].childNodes[j].getAttribute("ref")
+          if (elements.getElementsByTagName("transition")[i].childNodes[j].nodeName === "label" && elements.getElementsByTagName("transition")[i].childNodes[j].getAttribute("kind") === "select")
+            select = elements.getElementsByTagName("transition")[i].childNodes[j].innerHTML
+          if (elements.getElementsByTagName("transition")[i].childNodes[j].nodeName === "label" && elements.getElementsByTagName("transition")[i].childNodes[j].getAttribute("kind") === "guard")
+            guard = elements.getElementsByTagName("transition")[i].childNodes[j].innerHTML
+          if (elements.getElementsByTagName("transition")[i].childNodes[j].nodeName === "label" && elements.getElementsByTagName("transition")[i].childNodes[j].getAttribute("kind") === "synchronisation")
+            sync = elements.getElementsByTagName("transition")[i].childNodes[j].innerHTML
+          if (elements.getElementsByTagName("transition")[i].childNodes[j].nodeName === "label" && elements.getElementsByTagName("transition")[i].childNodes[j].getAttribute("kind") === "assignment")
+            assignment = elements.getElementsByTagName("transition")[i].childNodes[j].innerHTML
+        }
+        for (let k = 0; k < this.nodes.length; k++) {
+          if (this.nodes[k].identifier === from){
+            console.log("got from")
+            from = this.nodes[k]
+          }
+          if (this.nodes[k].identifier === to){
+            console.log("got to")
+            to = this.nodes[k]
+          }
+        }
+        const newLink = new Link(from, to, this.linkIdentifier)
+        if (select !== null)
+          newLink.select = select
+        if (guard !== null)
+          newLink.guard = guard
+        if (sync !== null)
+          newLink.sync = sync
+        if (assignment !== null)
+          newLink.update = assignment
+        this.links.push(newLink)
+        this.linkIdentifier++
+      }
+      this.drawCanvas()
+    },
     handleKeyDown(e) {
       if (e.altKey)
         this.altDown = true
@@ -191,7 +257,7 @@ export default {
       this.selectedObject = this.utils.selectObject(mouse.x, mouse.y, this.nodes, this.links)
       if (this.altDown && this.currentLink == null){
         if (this.selectedObject == null) {
-          this.nodes.push(new Node(mouse.x, mouse.y, 25, this.nodeIdentifier))
+          this.nodes.push(new Node(mouse.x, mouse.y, this.nodeRadius, this.nodeIdentifier))
           this.nodeIdentifier++
         } else {
           this.originalClick = mouse
