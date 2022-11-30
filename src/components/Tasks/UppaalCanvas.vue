@@ -94,6 +94,9 @@ import SelfLink from "@/components/Tasks/UppaalElements/SelfLink";
 import TaskButton from "@/components/Tasks/TaskButton";
 export default {
   name: 'UppaalCanvas',
+  props: {
+    taskId: Number
+  },
   data() {
     return {
       canvas: null,
@@ -121,8 +124,10 @@ export default {
       sync: '',
       update: '',
       chosenExercise: '',
-      exerciseId: 1,
-      nodeRadius: 25
+      nodeRadius: 25,
+      localDeclarations: null,
+      templateName: null,
+      systemData: null,
     }
   },
   components: {
@@ -133,9 +138,9 @@ export default {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: 1 })
+      body: JSON.stringify({ id: this.taskId })
     };
-    fetch("/exercise-provider", requestOptions)
+    fetch("/exercise-provider/client", requestOptions)
         .then(response => (response.json()))
         .then(data => (parser.parseFromString(data["template"].toString(), "application/xml")))
         .then(converted => this.importElements(converted));
@@ -150,6 +155,12 @@ export default {
       let initialState = ""
       if (elements.getElementsByTagName("init")[0].getAttribute("ref") !== null) {
         initialState = elements.getElementsByTagName("init")[0].getAttribute("ref")
+      }
+      this.localDeclarations = elements.getElementsByTagName("declaration")[1].innerHTML
+      this.templateName = {
+        "x": elements.getElementsByTagName("name")[0].getAttribute("x"),
+        "y": elements.getElementsByTagName("name")[0].getAttribute("y"),
+        "name": elements.getElementsByTagName("name")[0].innerHTML
       }
       for (let i = 0; i < elements.getElementsByTagName("location").length; i++) {
         let nodeId = elements.getElementsByTagName("location")[i].getAttribute("id")
@@ -186,7 +197,7 @@ export default {
           if (elements.getElementsByTagName("transition")[i].childNodes[j].nodeName === "label" && elements.getElementsByTagName("transition")[i].childNodes[j].getAttribute("kind") === "select")
             select = elements.getElementsByTagName("transition")[i].childNodes[j].innerHTML
           if (elements.getElementsByTagName("transition")[i].childNodes[j].nodeName === "label" && elements.getElementsByTagName("transition")[i].childNodes[j].getAttribute("kind") === "guard")
-            guard = elements.getElementsByTagName("transition")[i].childNodes[j].innerHTML
+            guard = elements.getElementsByTagName("transition")[i].childNodes[j].innerHTML.replace("&gt;", ">").replace("&lt;", "<")
           if (elements.getElementsByTagName("transition")[i].childNodes[j].nodeName === "label" && elements.getElementsByTagName("transition")[i].childNodes[j].getAttribute("kind") === "synchronisation")
             sync = elements.getElementsByTagName("transition")[i].childNodes[j].innerHTML
           if (elements.getElementsByTagName("transition")[i].childNodes[j].nodeName === "label" && elements.getElementsByTagName("transition")[i].childNodes[j].getAttribute("kind") === "assignment")
@@ -244,7 +255,6 @@ export default {
         }
       }
       this.drawCanvas()
-      console.log(e.keyCode)
     },
     handleKeyUp(e) {
       if (e.keyCode === 18) // 18 = altKey
@@ -255,7 +265,7 @@ export default {
       this.selectedObject = this.utils.selectObject(mouse.x, mouse.y, this.nodes, this.links)
       if (this.altDown && this.currentLink == null){
         if (this.selectedObject == null) {
-          this.nodes.push(new Node(mouse.x, mouse.y, this.nodeRadius, this.nodeIdentifier))
+          this.nodes.push(new Node(mouse.x, mouse.y, this.nodeRadius, "id"+this.nodeIdentifier))
           this.nodeIdentifier++
         } else {
           this.originalClick = mouse
@@ -396,37 +406,33 @@ export default {
     },
 
     submitXml() {
-      let convertedXML = '<?xml version="1.0" encoding="utf-8"?>\n'
-      convertedXML += "<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>\n"
-      convertedXML += "<nta>\n" +
-          "<declaration>// Place global declarations here.</declaration>\n" +
-          "<template>\n" +
-          "<name x=\"5\" y=\"5\">Template</name>\n" +
-          "<declaration>// Place local declarations here.</declaration> \n"
+      let convertedXML = "<template>\n" +
+          `<name x='${this.templateName.x}' y='${this.templateName.y}'>${this.templateName.name}</name>\n` +
+          `<declaration>${this.localDeclarations}</declaration> \n`
       for (let i = 0; i < this.nodes.length; i++) {
         convertedXML += this.nodes[i].convertToXML()
       }
       for (let i = 0; i < this.nodes.length; i++) {
         if (this.nodes[i].initial){
-          convertedXML += `<init ref="id${this.nodes[i].identifier}"/>`
+          convertedXML += `<init ref='${this.nodes[i].identifier}'/>`
         }
       }
       for (let i = 0; i < this.links.length; i++) {
         convertedXML += this.links[i].convertToXML()
       }
 
-      convertedXML += "</template><system>// Place template instantiations here.\n" +
-          "Process = Template();\n" +
-          "// List one or more processes to be composed into a system.\n" +
-          "system Process;\n" +
-          "    </system>\n" +
-          "\t<queries>\n" +
-          "\t\t<query>\n" +
-          "\t\t\t<formula></formula>\n" +
-          "\t\t\t<comment></comment>\n" +
-          "\t\t</query>\n" +
-          "\t</queries>\n" +
-          "</nta>"
+      convertedXML += "</template>"
+
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: this.taskId,
+          xml: convertedXML
+        })
+      };
+      fetch("/exercise-verifier", requestOptions)
+          .then(response => console.log(response.json()));
 
       console.log(convertedXML)
     }

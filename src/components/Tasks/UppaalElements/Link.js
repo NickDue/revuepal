@@ -170,16 +170,16 @@ class Link {
 
     convertToXML() {
         let all = "<transition>"
-        all += `<source ref="id${this.from}"/>`
-        all += `<target ref="id${this.to}"/>`
+        all += `<source ref='id${this.from}'/>`
+        all += `<target ref='id${this.to}'/>`
         if (this.select !== "")
-            all += `<label kind="select" x="${this.x}" y="${this.textY-5}">${this.select}</label>`
+            all += `<label kind='select' x='${this.x}' y='${this.textY-5}'>${this.select}</label>`
         if (this.guard !== "")
-            all += `<label kind="guard" x="${this.x}" y="${this.textY-5}">${this.guard}</label>`
+            all += `<label kind='guard' x='${this.x}' y='${this.textY-5}'>${this.guard}</label>`
         if (this.sync !== "")
-            all += `<label kind="synchronisation" x="${this.x}" y="${this.textY-5}">${this.sync}</label>`
+            all += `<label kind='synchronisation' x='${this.x}' y='${this.textY-5}'>${this.sync}</label>`
         if (this.update !== "")
-            all += `<label kind="assignment" x="${this.x}" y="${this.textY-5}">${this.update}</label>`
+            all += `<label kind='assignment' x='${this.x}' y='${this.textY-5}'>${this.update}</label>`
         all += "</transition>"
 
         return all

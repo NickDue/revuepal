@@ -3,7 +3,7 @@
     <h1>Welcome back! {{ username }}</h1>
   </div>
   <div class="task-container">
-    <TaskWindow :exercise-id=1 />
+    <TaskWindow />
   </div>
 </template>
 
@@ -14,9 +14,15 @@ export default {
   components: {
     TaskWindow
   },
+  data() {
+    return {
+      ex_id: 0,
+      allExercises: []
+    }
+  },
   props: {
     username: String
-  }
+  },
 }
 
 </script>

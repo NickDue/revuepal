@@ -91,18 +91,18 @@ class Node {
     }
 
     convertToXML () {
-        let all = `<location id="id${this.identifier}" x="${this.x}" y="${this.y}">`
+        let all = `<location id='${this.identifier}' x='${this.x}' y='${this.y}'>`
         if (this.name !== "")
-            all += `<name x="${this.x}" y="${Math.round(this.y) - this.radius - 3}">${this.name}</name>`;
+            all += `<name x='${this.x}' y='${Math.round(this.y) - this.radius - 3}'>${this.name}</name>`;
         if (this.invariant !== "")
-            all += `<label kind="invariant" x="${this.x}" y="${Math.round(this.y) + this.radius + 10}">${this.invariant}</label>`
+            all += `<label kind='invariant' x='${this.x}' y='${Math.round(this.y) + this.radius + 10}'>${this.invariant}</label>`
         if (this.exponential !== "")
-            all += `<label kind="exponentialrate" x="${this.x}" y="${Math.round(this.y) + this.radius + 10}">${this.exponential}</label>`
+            all += `<label kind='exponentialrate' x='${this.x}' y='${Math.round(this.y) + this.radius + 10}'>${this.exponential}</label>`
         if (this.urgent)
-            all += "<urgent/>"
+            all += '<urgent/>'
         if (this.committed)
-            all += "<committed/>"
-        all += "</location>"
+            all += '<committed/>'
+        all += '</location>'
 
         return all
     }

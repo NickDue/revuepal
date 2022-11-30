@@ -9,14 +9,14 @@
         <option value="fundamentals">Fundamentals</option>
         <option value="RankUp">Rank Up</option>
         <option value="PandR">Practice & Repeat</option>
-        <option value="random">radnom</option>
+        <option value="random">Random</option>
       </select>
     </div>
     <div class="button-container">
       <button class="simple-button train">
-        <router-link :to="'/task/'+currentTask" class="fa-solid fa-wave-square">Train</router-link>
+        <router-link :to="'/task/'+ex_id" class="fa-solid fa-wave-square">Train</router-link>
       </button>
-      <button class="simple-button train">
+      <button class="simple-button train" @click="skipToNextExercise">
         <i class="fa-solid fa-forward">Skip</i>
       </button>
     </div>
@@ -36,24 +36,43 @@ export default {
   name: 'TaskWindow',
   data() {
     return {
-      currentTask: 0,
       exerciseName: "",
-      exerciseDescription: ""
+      exerciseDescription: "",
+      allExercises: [],
+      ex_id: 1
     }
   },
-  props: {
-    exerciseId: Number
-  },
-  async created() {
+  created() {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ex_id: this.exerciseId })
     };
-    const response = await fetch("/data-access/get-exercise-description", requestOptions);
-    const data = await response.json();
-    this.exerciseDescription = data.description
-    this.exerciseName = data.name
+    fetch("/exercise-provider/avalable-exercises", requestOptions)
+        .then(response => response.json())
+        .then(data => (this.allExercises = data))
+        .then(random => (this.ex_id = random[Math.floor(Math.random() * this.allExercises.length)]))
+        .then(this.getExerciseDescription)
+  },
+  methods: {
+    async getExerciseDescription() {
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ex_id: this.ex_id})
+      };
+      const response = await fetch("/data-access/get-exercise-description", requestOptions);
+      const data = await response.json();
+      this.exerciseDescription = data.description
+      this.exerciseName = data.name
+    },
+    skipToNextExercise() {
+      let newNumber = this.allExercises[Math.floor(Math.random() * this.allExercises.length)]
+      while (newNumber === this.ex_id){
+        newNumber = this.allExercises[Math.floor(Math.random() * this.allExercises.length)]
+      }
+      this.ex_id = newNumber
+      this.getExerciseDescription()
+    }
   }
 }
 </script>

@@ -7,7 +7,7 @@
       <TaskDescription />
     </div>
     <div>
-      <UppaalCanvas />
+      <UppaalCanvas :task-id=taskid />
     </div>
   </div>
 </template>
@@ -23,7 +23,7 @@ export default {
   components: {
     TaskDescription,
     UppaalCanvas,
-  }
+  },
 }
 
 </script>
