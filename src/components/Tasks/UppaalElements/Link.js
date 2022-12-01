@@ -173,13 +173,13 @@ class Link {
         all += `<source ref='id${this.from}'/>`
         all += `<target ref='id${this.to}'/>`
         if (this.select !== "")
-            all += `<label kind='select' x='${this.x}' y='${this.textY-5}'>${this.select}</label>`
+            all += `<label kind='select' x='${this.x}' y='${this.textY-5}'>${this.select.replace("<", "&lt;").replace(">", "&gt;")}</label>`
         if (this.guard !== "")
-            all += `<label kind='guard' x='${this.x}' y='${this.textY-5}'>${this.guard}</label>`
+            all += `<label kind='guard' x='${this.x}' y='${this.textY-5}'>${this.guard.replace("<", "&lt;").replace(">", "&gt;")}</label>`
         if (this.sync !== "")
-            all += `<label kind='synchronisation' x='${this.x}' y='${this.textY-5}'>${this.sync}</label>`
+            all += `<label kind='synchronisation' x='${this.x}' y='${this.textY-5}'>${this.sync.replace("<", "&lt;").replace(">", "&gt;")}</label>`
         if (this.update !== "")
-            all += `<label kind='assignment' x='${this.x}' y='${this.textY-5}'>${this.update}</label>`
+            all += `<label kind='assignment' x='${this.x}' y='${this.textY-5}'>${this.update.replace("<", "&lt;").replace(">", "&gt;")}</label>`
         all += "</transition>"
 
         return all

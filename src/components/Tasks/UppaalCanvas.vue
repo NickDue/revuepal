@@ -156,7 +156,7 @@ export default {
       if (elements.getElementsByTagName("init")[0].getAttribute("ref") !== null) {
         initialState = elements.getElementsByTagName("init")[0].getAttribute("ref")
       }
-      this.localDeclarations = elements.getElementsByTagName("declaration")[1].innerHTML
+      this.localDeclarations = elements.getElementsByTagName("declaration")[0].innerHTML
       this.templateName = {
         "x": elements.getElementsByTagName("name")[0].getAttribute("x"),
         "y": elements.getElementsByTagName("name")[0].getAttribute("y"),
