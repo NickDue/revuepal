@@ -22,7 +22,7 @@ export default {
   border-radius: 4px;
   position: relative;
   cursor: pointer;
-  font-family: "Roboto", sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin-left: 2px;
 }
 </style>

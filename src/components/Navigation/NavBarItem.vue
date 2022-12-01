@@ -19,22 +19,24 @@ export default {
 .itemContainer {
   display: flex;
   align-items: center;
-  align-content: flex-end;
+  align-content: flex-start;
+  margin: auto;
 }
 
 .link {
   float: left;
   display: flex;
-  color: black;
+  color: white;
   align-content: center;
   padding: 14px;
   text-decoration: none;
-  font-size: 17px;
-  border-right: 1px solid black;
+  font-size: 15px;
+  font-weight: 600;
 }
 
 .link:hover {
-  background-color: aliceblue;
+  color: #6ddbb8;
+  transition: 0.8s;
 }
 
 

@@ -45,26 +45,18 @@ export default {
 
 <style>
 .scoreboardTable {
-  padding: 0;
-  margin: auto;
-  border-collapse: collapse;
-  width: 80%;
-  text-align: center;
-  color: black;
+    padding: 0;
+    margin: auto;
+    border-collapse: collapse;
+    width: 60%;
+    text-align: center;
+    color: black;
+    margin-top: 110px;
+  }
+
+.table {
+  box-shadow: 0 2px 4px 0 rgba(0,0,0.2);
 }
-.scoreboardHeaderRow {
-  color: darkorange;
-  font-weight: bold;
-  height: 50px;
-}
-.scoreboardRegularRow:hover{
-  background-color: darkorange;
-}
-.scoreboardRegularRow{
-  border: 1px solid black;
-}
-.scoreboardTable tr td {
-  height: 25px;
-}
+
 
 </style>

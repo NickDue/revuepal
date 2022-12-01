@@ -1,7 +1,8 @@
 <template>
-  <div class="container">
-    <router-link to="/login" class="link" id="loginButton">Login</router-link>
-    <router-link to="/register" class="link">Register</router-link>
+  <div class="loginBtnArea">
+    <GoogleLogin :callback="callback">
+      <input type="image" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" class="btnimg" v-on:click="openLoginMenu()"/>
+    </GoogleLogin>
   </div>
 </template>
 
@@ -13,30 +14,46 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: auto;
+
+
+
+
+.btnimg {
+  border-radius: 50%;
+  border: 2px solid white;
+  padding: 10%;
+  width: 25px;
+  height: 25px;
+  
 }
 
-.link {
-  float: left;
-  display: flex;
-  color: black;
-  align-content: center;
-  padding: 14px;
-  text-decoration: none;
-  font-size: 17px;
-  border-right: 1px solid black;
+.btnimg:hover{
+  border-color: #12ff94;
+  transition: 0.8s;
+  
 }
 
-.link:hover {
-  background-color: aliceblue;
+.btntext {
+  border: none;
+  background-color: #4B4B4B;
+  cursor: pointer;
+  color: white;
 }
 
-#loginButton {
-  border-left: 1px solid black;
+.btntext:hover {
+  color: #42B983;
+  transition: 0.8s;
+}
+
+.loginBtnArea {
+  display: inline-block;
+  background-color: #4B4B4B;
+  padding-left: 10px;
+  padding-right: 30px;
+  padding-bottom: 7px;
+  padding-top: 10px;
+  margin-left: 450px;
+  
 }
 
 </style>

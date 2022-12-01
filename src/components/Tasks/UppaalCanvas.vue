@@ -450,6 +450,7 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  
 }
 
 .optionsContainer {
@@ -458,10 +459,12 @@ export default {
   width: 20%;
   height: 550px;
   margin-left: 20px;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0.2);
+  background-color: white;
 }
 
 h4 {
-  margin-top: 2px;
+  margin-top: 0px;
   padding-bottom: 2px;
   border-bottom: 1px solid black;
   margin-bottom: 0;
@@ -485,6 +488,7 @@ h5 {
 
 #myCanvas {
   border: 1px solid black;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0.2);
 }
 
 .input-texts {
@@ -512,5 +516,11 @@ button {
   display: flex;
   justify-content: flex-end;
 }
+
+.header-field {
+  background-color: #6ddbb8;
+  color: white;
+}
+
 
 </style>
