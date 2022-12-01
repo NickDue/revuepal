@@ -6,6 +6,7 @@ import Train from '../views/TrainPage'
 import Register from '../views/RegisterPage'
 import Login from '../views/LoginPage'
 import User from '../views/UserPage'
+import SelectPage from '../views/SelectPage'
 
 const routes = [
     {
@@ -24,8 +25,14 @@ const routes = [
         component: Leaderboards
     },
     {
-        path: '/train',
+        path: '/select',
         name: 'Train',
+        component: SelectPage
+    },
+
+    {
+        path:'/train',
+        name: 'Training',
         component: Train
     },
     {

@@ -7,7 +7,7 @@
     />
     <NavBarItem v-if="isLoggedIn === true"
         name="TRAIN"
-        route="/train"
+        route="/select"
     />
 
     <NavBarItem v-if="isLoggedIn === false"

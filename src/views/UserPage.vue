@@ -51,6 +51,8 @@ import ContentCard from "@/components/Personal/Content/ContentCard";
   display: flex;
   flex-direction: row;
   height: 850px;
+  border: 1px solid black;
+  background-color: gray;
 }
 
 .content-divider {
