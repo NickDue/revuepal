@@ -170,8 +170,8 @@ class Link {
 
     convertToXML() {
         let all = "<transition>"
-        all += `<source ref='id${this.from}'/>`
-        all += `<target ref='id${this.to}'/>`
+        all += `<source ref='${this.from}'/>`
+        all += `<target ref='${this.to}'/>`
         if (this.select !== "")
             all += `<label kind='select' x='${this.x}' y='${this.textY-5}'>${this.select.replace("<", "&lt;").replace(">", "&gt;")}</label>`
         if (this.guard !== "")
