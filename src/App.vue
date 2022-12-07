@@ -1,6 +1,6 @@
 <template>
   <header>
-    <NavBar :is-logged-in="true"/>
+    <NavBar :is-logged-in="false"/>
   </header>
   <router-view></router-view>
 </template>

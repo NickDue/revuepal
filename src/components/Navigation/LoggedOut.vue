@@ -1,22 +1,28 @@
 <template>
   <div class="loginBtnArea">
     <GoogleLogin :callback="callback">
-      <input type="image" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" class="btnimg" v-on:click="openLoginMenu()"/>
+      <button>Login Using Google</button>
     </GoogleLogin>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'LoggedOut'
-}
+<script setup>
+  const callback = (response) => {
+    console.log("Handle the response", response)
+    
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ "code": String(response.code) })
+    };
+    
+    fetch("/google-verifier", requestOptions)
+        .then(response2 => console.log(response2.code))
+  }
 
 </script>
 
-<style scoped>
-
-
-
+<style>
 
 .btnimg {
   border-radius: 50%;

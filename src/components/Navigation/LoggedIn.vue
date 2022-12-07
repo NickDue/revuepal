@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     
-    <input type="image" src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" class="btnimg" v-on:click="openMenu()">
+    <input type="image" src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" class="btnimg">
   </div>
 </template>
 
