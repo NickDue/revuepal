@@ -26,7 +26,7 @@
         name="ABOUT"
         route="/about"
     />
-    <LoggedOut v-if="isLoggedIn === false"/>
+    <LoggedOut @logsin="logsin" v-if="isLoggedIn === false"/>
     <LoggedIn v-if="isLoggedIn === true"/>
   </div>
 </template>
@@ -39,11 +39,12 @@ import ruLogo from "@/components/Navigation/RevuppaalLogo";
 
 export default {
   name: 'NavBar',
+  data() {
+    return {
+      isLoggedIn: false
+    }
+  },
   props: {
-    isLoggedIn: {
-      type: Boolean,
-      default: true
-    },
     username: String
   },
   components: {
@@ -51,6 +52,12 @@ export default {
     NavBarItem,
     LoggedOut,
     ruLogo
+  },
+
+  methods: {
+    logsin(value){
+      this.isLoggedIn = value
+    }
   }
 }
 

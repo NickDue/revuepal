@@ -7,6 +7,9 @@
 </template>
 
 <script setup>
+  import {defineEmits} from 'vue'
+  const emit = defineEmits(['logsin'])
+
   const callback = (response) => {
     console.log("Handle the response", response)
     
@@ -16,9 +19,13 @@
       body: JSON.stringify({ "code": String(response.code) })
     };
     
-    fetch("/google-verifier", requestOptions)
-        .then(response2 => console.log(response2.code))
+    fetch("/auth", requestOptions)
+        .then(myFunction())
   }
+
+  const myFunction = () => {
+    emit('logsin', true)
+  }      
 
 </script>
 
