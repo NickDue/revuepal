@@ -8,7 +8,7 @@
 
 <script setup>
   import {defineEmits} from 'vue'
-  const emit = defineEmits(['logsin'])
+  const emit = defineEmits(['logsin', 'getUsername'])
 
   const callback = (response) => {
     console.log("Handle the response", response)
@@ -17,14 +17,30 @@
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ "code": String(response.code) })
-    };
+    };  
     
     fetch("/auth", requestOptions)
+        .then(usernameFetch())
         .then(myFunction())
   }
 
   const myFunction = () => {
     emit('logsin', true)
+  }
+
+  const emitJson = (jData) => {
+    emit('getUsername', jData.name)
+  }
+
+  const usernameFetch= () => {
+    const requestOptions2 = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" }
+    }
+    fetch("/data-access/user-profile-info", requestOptions2)
+          .then(data => data.json())
+          .then(jData => emitJson(jData))
+
   }      
 
 </script>

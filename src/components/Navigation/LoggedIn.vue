@@ -1,7 +1,7 @@
 <template>
   <div class="container"> 
-    <input type="image" src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" class="btnimg" @onclick="Redirect">
-    <router-link :to="'/user/'+ this.username" class="fa-solid fa-wave-square">User</router-link>
+    <input type="image" src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" class="btnimg">
+    <router-link :to="'/user/'+ username" class="fa-solid fa-wave-square">User</router-link>
   </div>
 </template>
 
@@ -15,8 +15,7 @@ export default {
     }
   },
 
-  methods: {
-    Redirect() {
+  created() {
       try {
         const requestOptions = {
         method: "GET",
@@ -25,15 +24,12 @@ export default {
         fetch("/data-access/user-profile-info", requestOptions)
             .then(response => response.json())
             .then(rj => (this.username = rj.name))
-            .then(this.$router.push(`/user/${this.username}`))
         
       }
 
       catch(e) {
         console.log("Exception: " + e)
       }
-      
-    }
   }
 }
 

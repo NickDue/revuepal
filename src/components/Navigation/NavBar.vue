@@ -26,7 +26,7 @@
         name="ABOUT"
         route="/about"
     />
-    <LoggedOut @logsin="logsin" v-if="isLoggedIn === false"/>
+    <LoggedOut @logsin="logsin" @getUsername="getUsername" v-if="isLoggedIn === false"/>
     <LoggedIn v-if="isLoggedIn === true"/>
   </div>
 </template>
@@ -41,11 +41,9 @@ export default {
   name: 'NavBar',
   data() {
     return {
-      isLoggedIn: false
+      isLoggedIn: false,
+      username: ""
     }
-  },
-  props: {
-    username: String
   },
   components: {
     LoggedIn,
@@ -57,6 +55,11 @@ export default {
   methods: {
     logsin(value){
       this.isLoggedIn = value
+    },
+
+    getUsername(value){
+      console.log(value)
+      this.username = value
     }
   }
 }
