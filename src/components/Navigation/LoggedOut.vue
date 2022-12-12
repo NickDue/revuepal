@@ -38,10 +38,16 @@
       headers: { "Content-Type": "application/json" }
     }
     fetch("/data-access/user-profile-info", requestOptions2)
-          .then(data => data.json())
-          .then(jData => emitJson(jData))
+          .then(response => { if(response.status == 404) { newFunc();  
+          console.log("Entered if");
+          console.log(response.status) } else { emitJson(response.json())
+          console.log("Error, else entered")} } )
 
-  }      
+  }
+
+  const newFunc = () => {
+    this.$router.push('/login');
+  }
 
 </script>
 

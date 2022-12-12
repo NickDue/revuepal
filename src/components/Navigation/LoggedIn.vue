@@ -1,8 +1,5 @@
 <template>
-  <div class="container"> 
-    <input type="image" src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" class="btnimg">
-    <router-link :to="'/user/'+ username" class="fa-solid fa-wave-square">User</router-link>
-  </div>
+  <DropDown/>
 </template>
 
 <script>
@@ -47,12 +44,13 @@ export default {
   
 }
 
-.btnimg {
+.img_user {
   border-radius: 50%;
   border: 2px solid white;
   background-color: #089e7f;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
+  margin-top: .3.5rem;
   
   
 }
