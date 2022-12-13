@@ -21,11 +21,14 @@ export default {
 <style scoped>
 .stats-container {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .stats-field {
   display: flex;
   justify-content: space-between;
   flex-grow: 1;
+  margin: auto;
 }
 .stats-item {
   margin: 3px;

@@ -26,8 +26,7 @@ export default {
 
 .img-container {
   display: flex;
-  justify-content: center;
-  overflow: hidden;
+  justify-content: stretch;
 }
 
 .select-imgs{

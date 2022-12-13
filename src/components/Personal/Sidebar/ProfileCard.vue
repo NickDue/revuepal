@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper2">
     <div class="profile-header">
       <ProfileHeader :username="username" :title=title />
     </div>
@@ -9,22 +9,12 @@
       <StatField stat-name="# Completed" stat-value="20"/>
       <StatField stat-name="Created" :stat-value=createdAt />
     </div>
-    <div class="socials-panel">
-      <OtherSocials
-        facebook="fa-brands fa-facebook-square fa-xl"
-        instagram="fa-brands fa-instagram-square fa-xl"
-        github="fa-brands fa-github-square fa-xl"
-        gitlab="fa-brands fa-gitlab-square fa-xl"
-        linkedin="fa-brands fa-linkedin fa-xl"
-      />
-    </div>
   </div>
 </template>
 
 <script>
 import StatField from "@/components/Personal/Sidebar/StatField";
 import ProfileHeader from "@/components/Personal/Sidebar/ProfileHeader";
-import OtherSocials from "@/components/Personal/Sidebar/OtherSocials";
 export default {
   name: 'ProfileCard',
   props: {
@@ -35,7 +25,6 @@ export default {
   components: {
     StatField,
     ProfileHeader,
-    OtherSocials
   }
 }
 </script>
@@ -49,15 +38,19 @@ export default {
   margin-top: 10px;
   margin-right: 10px;
   column-gap: 2px;
+  box-shadow: 0 0 3px 0 rgba(0,0,0.2);
+  background-color: #575555;
+  color: white;
+  padding: 30px;
 }
 
-.socials-panel {
+.wrapper2 {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-left: 50px;
-  margin-right: 50px;
-  margin-top: 20px;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
 }
+
+
 
 </style>

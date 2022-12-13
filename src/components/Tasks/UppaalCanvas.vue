@@ -1,6 +1,6 @@
 <template>
   <div class="canvas-container">
-    <canvas id="myCanvas" width="1000" height="550" @keydown="handleKeyDown" @keyup="handleKeyUp" tabindex="1" @click="handleLeftClick" @mousemove="handleMouseMove">
+    <canvas id="myCanvas" width="1000" height="500" @keydown="handleKeyDown" @keyup="handleKeyUp" tabindex="1" @click="handleLeftClick" @mousemove="handleMouseMove">
     </canvas>
     <div class="optionsContainer">
       <h4>
@@ -457,7 +457,7 @@ export default {
   display: block;
   border: 1px solid black;
   width: 20%;
-  height: 550px;
+  height: 500px;
   margin-left: 20px;
   box-shadow: 0 2px 4px 0 rgba(0,0,0.2);
   background-color: white;
@@ -515,6 +515,7 @@ button {
   position: relative;
   display: flex;
   justify-content: flex-end;
+
 }
 
 .header-field {

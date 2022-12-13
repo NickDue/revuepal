@@ -33,8 +33,10 @@
     justify-content: space-between;
     border: 1px solid black;
     width: 100%;
-    border-radius: 25px;
+    border-radius: 5px;
     overflow: auto;
+    background-color: #4b4b4b;
+    color: white;
   }
   
   </style>

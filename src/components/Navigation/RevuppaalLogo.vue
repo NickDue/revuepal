@@ -12,7 +12,7 @@
     left: 0;
     height: 75px;
     width: 220px;
-    padding-right: 17%;
+    padding-right: 10%;
 }
 
 </style>

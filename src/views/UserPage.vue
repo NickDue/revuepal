@@ -50,29 +50,38 @@ import ContentCard from "@/components/Personal/Content/ContentCard";
 .profile-container {
   display: flex;
   flex-direction: row;
-  height: 850px;
-  border: 1px solid black;
-  background-color: gray;
-}
-
-.content-divider {
-  display: block;
-  border: 1px solid black;
-  margin-right: 2%;
+  height: 100%;
+  background-color: white;
+  margin-top: 100px;
+  overflow: none;
 }
 
 .sidebar-container {
   display: flex;
-  width: 35%;
-  margin-right: 2%;
+  width: 50%;
+  height: 70%;
+  margin-right: 30px;
   overflow: auto;
+  border: 1px solid black;
+  box-shadow: 0 0 4px 0 rgba(0,0,0.2);
+  margin-left: 30px;
+  padding: 30px;
+  background-color: #4b4b4b;
 }
 
 .main-content-container {
   display: flex;
-  align-content: stretch;
-  flex-direction: column;
-  width: 59%;
+  width: 40%;
+  height: 70%;
+  margin-right: 30px;
+  overflow: auto;
+  border: 1px solid black;
+  box-shadow: 0 0 4px 0 rgba(0,0,0.2);
+  border: none;
+  margin-left: 30px;
+  padding: 30px;
+  background-color: #4b4b4b;
+  color: white;
 }
 
 

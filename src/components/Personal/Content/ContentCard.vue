@@ -30,12 +30,13 @@ export default {
 .card {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  border: 1px solid black;
+  justify-content: center; 
   margin-top: 10px;
   margin-right: 5px;
   margin-left: 5px;
   padding: 10px;
+  margin: auto;
+  font-size: 16px;
 }
 
 </style>

@@ -11,8 +11,8 @@
 .LogoBar {
     top: 80px;
     left: 0;
-    height: 600px;
-    width: 110%;
+    height: 550px;
+    width: 120%;
 }
 
 </style>

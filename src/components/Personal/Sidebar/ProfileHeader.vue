@@ -20,12 +20,20 @@ export default {
 
 <style scoped>
 .profile-image {
-  margin-top: 20px;
+  margin-top: 10%;
   border-radius: 50%;
   width: 40%;
+  display: flex;
+  margin: auto;
+  border: 2px solid #6ddbb8;
+  box-shadow: 0 0 4px 0 rgba(0,0,0.2);
+  margin-bottom: 10px;
+  background-color: white;
 }
 .user-header {
   margin: 0;
+  margin: auto;
+  color: white;
 }
 
 </style>

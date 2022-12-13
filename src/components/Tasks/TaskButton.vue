@@ -1,28 +1,36 @@
 <template>
-  <button class="simple-button" @click="$emit('clicked')">
-    <i :class=icon>{{ text }}</i>
+  <button class="btns" @click="$emit('clicked')">
+    {{ text }}
   </button>
 </template>
 
 <script>
 export default {
   name: "TaskButton",
-  props: {
-    icon: String,
-    text: String
-  }
 }
 </script>
 
 <style scoped>
-.simple-button {
-  border: 2px solid #d2bdff;
-  height: 30px;
-  width: 90px;
-  border-radius: 4px;
-  position: relative;
-  cursor: pointer;
-  font-family: "Montserrat", sans-serif;
-  margin-left: 2px;
+
+.btns {
+background-color: #4b4b4b;
+color: white;
+height: 40px;
+width: 100px;
+font-weight: 600;
+font-size: 12px;
+cursor: pointer;
+transition: 0.6s;
+border-radius: 4px;
+font-family: "Montserrat", sans-serif;
+margin-right: 7.5%;
+box-shadow: 0 0 4px 0 rgba(0,0,0.2);
+border: none;
+color: #6ddbb8;
+}
+
+.btns:hover {
+color: #6ddbb8;
+transition: 0.4s;
 }
 </style>

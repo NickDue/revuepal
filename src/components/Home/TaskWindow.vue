@@ -13,11 +13,11 @@
       </select>
     </div>
     <div class="button-container">
-      <button class="simple-button train">
-        <router-link :to="'/task/'+ex_id" class="fa-solid fa-wave-square">Train</router-link>
+      <button class="btn">
+        <router-link class="btn" :to="'/task/'+ex_id">Train</router-link>
       </button>
-      <button class="simple-button train" @click="skipToNextExercise">
-        <i class="fa-solid fa-forward">Skip</i>
+      <button class="btn" @click="skipToNextExercise">
+        Skip
       </button>
     </div>
   </div>
@@ -90,18 +90,27 @@ export default {
   max-width: 35%;
   border-right: 1px solid black;
   padding-right: 10%;
+
 }
 
-.simple-button {
-  border: 2px solid #d2bdff;
+.btn {
   height: 30px;
   width: 80px;
   border-radius: 4px;
   position: relative;
   cursor: pointer;
-  font-family: "Roboto", sans-serif;
+  font-family: "Monserrat", sans-serif;
+  background-color: #4b4b4b;
+  color: white;
+  font-size: 12px;
+  transition: 0.6s;
+  text-decoration: none;
 }
 
+.btn:hover {
+color: #6ddbb8;
+transition: 0.4s;
+}
 .button-container {
   display: flex;
   justify-content: flex-start;
@@ -130,6 +139,7 @@ p {
   margin: 0 auto;
   font-size: 18px;
   border-radius: 15px;
+  background-color: #6ddbb8;
 }
 
 .description-container {
@@ -141,10 +151,11 @@ p {
   width: 47%;
   margin-top: 10px;
   margin-bottom: 10px;
+  overflow: hidden;
 }
 
 .description-text {
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .description-header-text {
@@ -155,6 +166,8 @@ p {
 router-link {
   text-decoration: none;
 }
+
+
 
 
 </style>

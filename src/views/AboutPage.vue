@@ -68,6 +68,7 @@ color: white;
 flex-direction: row;
 justify-content: center;
 margin-top: 110px;
+height: 400px;
 
 }
 
@@ -83,15 +84,14 @@ cursor: pointer;
 transition: 0.6s;
 align-items: center;
 vertical-align: bottom;
-position:absolute;
 bottom:10%;
 margin-left: 5%;
+margin-top: 5%;
 
 }
 
 .btn:hover {
 color: #6ddbb8;
-border: 3px solid #4b4b4b;
 transition: 0.4s;
 }
 
@@ -113,6 +113,7 @@ height: 3px;
 background-color: black;
 border: none;
 margin: 0px;
+overflow: hidden;
 }
 
 .headline {
@@ -130,6 +131,7 @@ padding-left: 100px;
 padding-right: 100px;
 box-shadow: 0 0 4px 0 rgba(0,0,0.2);
 border: none;
+overflow: hidden;
 
 }
 

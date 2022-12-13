@@ -16,21 +16,22 @@ export default {
 
 <style scoped>
 .description-container {
-  border: 1px solid black;
   display: flex;
   flex-direction: column;
-  height: 220px;
+  height: 180px;
   box-shadow: 0 2px 4px 0 rgba(0,0,0.2);
-  overflow: scroll;
+  overflow-y: hidden;
+  overflow-x: disabled;
   background-color: #6ddbb8;
   background-repeat: no-repeat;
   background-size: 100%;
-  width: 70.5%;
+  width: 81.7%;
   margin: auto;
   color: white;
   padding: 30px;
+  padding-top: 0px;
   text-align: justify;
-  margin-top: 70px;
+  box-shadow: 0 0 4px 0 rgba(0,0,0.2);
 }
 
 .underline {
@@ -46,6 +47,5 @@ export default {
   margin: 10px;
   font-size: 28px;
 }
-
 
 </style>

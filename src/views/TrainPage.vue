@@ -1,9 +1,6 @@
 <template>
   <div class="container">
-    <div>
-      <h1>Complete this task!</h1>
-    </div>
-    <div>
+    <div class="tds">
       <TaskDescription />
     </div>
     <div>
@@ -33,7 +30,10 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
 }
 
+.tds {
+  margin-top: 60px;
+}
 </style>

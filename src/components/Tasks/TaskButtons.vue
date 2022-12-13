@@ -1,7 +1,7 @@
 <template>
   <div class="button-container">
-    <TaskButton icon="fa-solid fa-check" text="Submit" />
-    <TaskButton icon="fa-solid fa-forward" text="Skip" />
+    <TaskButton text="Submit" />
+    <TaskButton text="Skip" />
   </div>
 </template>
 
@@ -21,6 +21,4 @@ export default {
   display: flex;
   justify-content: flex-end;
 }
-
-
 </style>
