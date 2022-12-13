@@ -36,7 +36,7 @@ const routes = [
         component: Train
     },
     {
-        path: '/create',
+        path: '/data-access/create-user',
         name: 'Create',
         component: Create
     },

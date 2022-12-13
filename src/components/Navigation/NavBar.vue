@@ -12,7 +12,7 @@
 
     <NavBarItem v-if="isLoggedIn === false"
         name="TRAIN"
-        route="/create"
+        route="/data-access/create-user"
     />
     <NavBarItem v-if="isLoggedIn === true"
         name="LEADERBOARDS"
@@ -20,13 +20,13 @@
     />
     <NavBarItem v-if="isLoggedIn === false"
         name="LEADERBOARDS"
-        route="/create"
+        route="/data-access/create-user"
     />
     <NavBarItem
         name="ABOUT"
         route="/about"
     />
-    <LoggedOut @logsin="logsin" @getUsername="getUsername" v-if="isLoggedIn === false"/>
+    <LoggedOut @logsin="logsin" @getUsername="getUsername" @redirect="redirect()" v-if="isLoggedIn === false"/>
     <LoggedIn @logsout="logsin" v-if="isLoggedIn === true"/>
   </div>
 </template>
@@ -41,7 +41,7 @@ export default {
   name: 'NavBar',
   data() {
     return {
-      isLoggedIn: true,
+      isLoggedIn: false,
       username: ""
     }
   },
@@ -60,6 +60,11 @@ export default {
     getUsername(value){
       console.log(value)
       this.username = value
+    },
+    
+    redirect(value){
+      console.log(value)
+      this.$router.push('/data-access/create-user')
     }
   }
 }

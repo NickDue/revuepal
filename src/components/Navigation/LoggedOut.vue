@@ -1,6 +1,6 @@
 <template>
   <div class="loginBtnArea">
-    <button class="login" @click="$router.push('create')">Sign Up</button>
+    <button class="login" @click="$router.push({name: 'Create'})">Sign Up</button>
     <GoogleLogin :callback="callback">
       <button class="login">Login</button>
     </GoogleLogin>
@@ -48,7 +48,7 @@
   }
 
   const newFunc = () => {
-    this.$router.push('/login');
+    this.$router.push({name: 'Create'});
   }
 
 </script>
