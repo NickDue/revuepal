@@ -32,8 +32,6 @@ export default {
 .select-imgs{
   width: 33%;
   padding: 50px;
-  
-  
 }
 
 .select-imgs:after {

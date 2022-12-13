@@ -1,5 +1,5 @@
 <template>
-  <button class="btn" @click="logoutUser">
+  <button class="btn" @click="logoutUser(); logOut()">
       Logout
     </button>
   <div>
@@ -13,8 +13,7 @@
 
 <script>
 
-import {defineEmits} from 'vue'
-const emit = defineEmits(['logsout'])
+
 
 export default {
   name: 'LoggedIn',
@@ -32,14 +31,10 @@ export default {
 
   methods: {
     logoutUser() {
-      var cookies = document.cookie.split('; ');
-      
-      cookies.forEach(function(cookie){
-        if(cookie.startsWith('access_token') || cookie.startsWith('refresh_token')) {
-          localStorage.removeItem('access_token');
-          localStorage.removeItem('refresh_token');
-        }
-      })
+      console.log("Hi")
+      var hej = this.$cookies.remove('access_token');
+      console.log(hej)
+      this.$cookies.remove('refresh_token');
     },
 
     enterMenu() {
@@ -63,16 +58,22 @@ export default {
         console.log("Exception: " + e)
       }
     },
-
-    logOut (){
-      emit('logsin', false);
-    }
+    
+    
 
   }
 }
 
 </script>
 
+<script setup>
+  import {defineEmits} from 'vue'
+  const emit = defineEmits(['logsout'])
+  const logOut = () => {
+    emit('logsout', false);
+  }
+
+</script>
 <style scoped>
 .container {
   display: flex;

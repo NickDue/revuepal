@@ -1,5 +1,5 @@
 {
-  "name": "revuepal",
+  "name": "revuppaal",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -13,6 +13,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.1",
     "core-js": "^3.8.3",
     "vue": "^3.2.13",
+    "vue-cookies": "^1.8.2",
     "vue-lorem-ipsum": "^0.0.1",
     "vue3-google-login": "^2.0.12"
   },

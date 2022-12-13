@@ -27,7 +27,7 @@
         route="/about"
     />
     <LoggedOut @logsin="logsin" @getUsername="getUsername" v-if="isLoggedIn === false"/>
-    <LoggedIn v-if="isLoggedIn === true"/>
+    <LoggedIn @logsout="logsin" v-if="isLoggedIn === true"/>
   </div>
 </template>
 
@@ -41,7 +41,7 @@ export default {
   name: 'NavBar',
   data() {
     return {
-      isLoggedIn: false,
+      isLoggedIn: true,
       username: ""
     }
   },

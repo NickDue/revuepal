@@ -1,9 +1,11 @@
 <template>
   <div class="loginBtnArea">
+    <button class="login" @click="$router.push('create')">Sign Up</button>
     <GoogleLogin :callback="callback">
       <button class="login">Login</button>
     </GoogleLogin>
   </div>
+  
 </template>
 
 <script setup>
@@ -81,7 +83,7 @@
 }
 
 .loginBtnArea {
-  display: inline-block;
+  display: flex;
   background-color: #4B4B4B;
   padding-left: 10px;
   padding-right: 30px;
