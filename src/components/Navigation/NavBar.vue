@@ -41,7 +41,7 @@ export default {
   name: 'NavBar',
   data() {
     return {
-      isLoggedIn: true,
+      isLoggedIn: false,
       username: ""
     }
   },

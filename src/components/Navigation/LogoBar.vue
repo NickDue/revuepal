@@ -12,7 +12,7 @@
     top: 80px;
     left: 0;
     height: 550px;
-    width: 120%;
+    width: 110%;
 }
 
 </style>

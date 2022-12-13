@@ -1,7 +1,7 @@
 <template>
   <div class="loginBtnArea">
     <GoogleLogin :callback="callback">
-      <button>Login Using Google</button>
+      <button class="login">Login</button>
     </GoogleLogin>
   </div>
 </template>
@@ -89,6 +89,27 @@
   padding-top: 10px;
   margin-left: 450px;
   
+}
+
+.login {
+  background-color: #4b4b4b;
+  margin-right: 20px;
+  border-radius: 5px;
+  width: 70px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  background-color: #4b4b4b;
+  cursor: pointer;
+  color: white;
+  box-shadow: 0 0 4px 0 rgba(0,0,0.2);
+}
+
+.login:hover{
+  color: #42B983;
+  transition: 1s;
 }
 
 </style>

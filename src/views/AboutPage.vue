@@ -131,7 +131,9 @@ padding-left: 100px;
 padding-right: 100px;
 box-shadow: 0 0 4px 0 rgba(0,0,0.2);
 border: none;
-overflow: hidden;
+overflow-y: scroll;
+scrollbar-width: none; /* Firefox */
+-ms-overflow-style: none;  /* Internet Explorer 10+ */
 
 }
 

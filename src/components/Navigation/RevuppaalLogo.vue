@@ -9,6 +9,8 @@
 
 .RevuppaalLogo {
     top: 0;
+    display: flex;
+    justify-content: stretch;
     left: 0;
     height: 75px;
     width: 220px;
