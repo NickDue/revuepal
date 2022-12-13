@@ -12,7 +12,7 @@
 
     <NavBarItem v-if="isLoggedIn === false"
         name="TRAIN"
-        route="/login"
+        route="/create"
     />
     <NavBarItem v-if="isLoggedIn === true"
         name="LEADERBOARDS"
@@ -20,7 +20,7 @@
     />
     <NavBarItem v-if="isLoggedIn === false"
         name="LEADERBOARDS"
-        route="/login"
+        route="/create"
     />
     <NavBarItem
         name="ABOUT"

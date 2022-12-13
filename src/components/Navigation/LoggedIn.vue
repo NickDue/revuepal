@@ -7,8 +7,6 @@
     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" class="btnimg">   
   </button>
   </div>
-
-  
 </template>
 
 <script>

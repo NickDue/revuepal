@@ -4,7 +4,7 @@ import About from '../views/AboutPage'
 import Leaderboards from '../views/LeaderboardsPage'
 import Train from '../views/TrainPage'
 import Register from '../views/RegisterPage'
-import Login from '../views/CreateLoginPage'
+import Create from '../views/CreateLoginPage'
 import User from '../views/UserPage'
 import SelectPage from '../views/SelectPage'
 
@@ -38,7 +38,7 @@ const routes = [
     {
         path: '/create',
         name: 'Create',
-        component: Login
+        component: Create
     },
     {
         path: '/register',

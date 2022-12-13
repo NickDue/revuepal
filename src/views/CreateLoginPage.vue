@@ -6,7 +6,7 @@
       
       <div class="input-box">
         <label for="username"><b>Username</b></label>
-        <input type="text" v-model="username" placeholder="Username" name="email" required>
+        <input type="text" v-model="username" placeholder="Username" name="username" required>
       </div>
       <div class="input-box">
         <label for="email"><b>Email</b></label>
