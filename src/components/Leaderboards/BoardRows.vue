@@ -30,13 +30,14 @@ export default {
 
 </script>
 
-<style scoped>
+<style>
 .scoreboardRegularRow {
     border: 1px solid black;
     background-color: #333333;
     color: white;
     font-size: 13px;
     font-weight: 600;
+
   }
 
   .scoreboardRegularRow:nth-child(2n){
@@ -47,11 +48,13 @@ export default {
     height: 30px;
   }
 
-  .rl {
+</style>
+
+<style scoped>
+a {
     color: white;
     text-decoration: none;
     font-weight: 700;
     
   }
-
 </style>

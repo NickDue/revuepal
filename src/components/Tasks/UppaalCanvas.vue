@@ -422,13 +422,15 @@ export default {
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
         body: JSON.stringify({
           id: this.taskId,
           xml: convertedXML
         })
       };
       fetch("/exercise-verifier", requestOptions)
-          .then(response => console.log(response.json()));
+          .then(response => response.json())
+          .then(data => {alert(data.message); if(data.status == "success"){ this.$router.push('/') } });
 
       console.log(convertedXML)
     }
