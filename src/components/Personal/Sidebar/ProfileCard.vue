@@ -4,9 +4,8 @@
       <ProfileHeader :username="username" :title=title />
     </div>
     <div class="stats-main">
-      <StatField stat-name="Total Score" stat-value="2000"/>
-      <StatField stat-name="Achievements" stat-value="2"/>
-      <StatField stat-name="# Completed" stat-value="20"/>
+      <StatField stat-name="Total Score" :stat-value=score />
+      <StatField stat-name="# Completed" :stat-value=completedExercises />
       <StatField stat-name="Created" :stat-value=createdAt />
     </div>
   </div>
@@ -21,6 +20,8 @@ export default {
     username: String,
     title: String,
     createdAt: String,
+    completedExercises: String,
+    score: String,
   },
   components: {
     StatField,

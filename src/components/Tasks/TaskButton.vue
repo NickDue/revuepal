@@ -7,6 +7,9 @@
 <script>
 export default {
   name: "TaskButton",
+  props: {
+    text: String
+  }
 }
 </script>
 

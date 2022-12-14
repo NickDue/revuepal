@@ -1,7 +1,7 @@
 <template>
   <div class="profile-container">
     <div class="sidebar-container">
-      <ProfileCard :username=username :title=title :created-at=createdAt />
+      <ProfileCard :username=username :title=title :createdAt=createdAt :completedExercises=completedExercises :score=totalScore />
     </div>
     <div class="content-divider"></div>
     <div class="main-content-container">
@@ -21,7 +21,9 @@ import ContentCard from "@/components/Personal/Content/ContentCard";
       return {
         title: '',
         createdAt: '',
-        about: ''
+        about: '',
+        completedExercises: '',
+        totalScore: ''
       }
     },
     props: {
@@ -40,8 +42,10 @@ import ContentCard from "@/components/Personal/Content/ContentCard";
       const response = await fetch("/data-access/get-user-info", requestOptions);
       const data = await response.json();
       this.about = data.about;
-      this.createdAt = data.createdAt
+      this.createdAt = data.createdat
       this.title = data.title
+      this.completedExercises = data.completed_exercises
+      this.totalScore = data.total_score
     }
   }
 </script>

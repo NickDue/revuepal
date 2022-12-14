@@ -1,7 +1,7 @@
 <template>
   <div class="button-container">
-    <TaskButton text="Submit" />
-    <TaskButton text="Skip" />
+    <TaskButton :text="Submit" />
+    <TaskButton :text="Skip" />
   </div>
 </template>
 

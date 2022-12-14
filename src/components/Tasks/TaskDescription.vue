@@ -1,17 +1,18 @@
 <template>
   <div class="description-container">
-    <LoremIpsum class="description-text" add="3p" />
+    <h1>{{ exerciseName }}</h1>
+    <p>{{ description }}</p>
   </div>
 </template>
 
 <script>
-import LoremIpsum from 'vue-lorem-ipsum';
 export default {
-  name: 'TaskDescription',
-  components: {
-    LoremIpsum
+  props: {
+    description: String,
+    exerciseName: String
   }
 }
+
 </script>
 
 <style scoped>

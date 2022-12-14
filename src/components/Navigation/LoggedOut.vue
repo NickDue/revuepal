@@ -37,7 +37,8 @@
   const usernameFetch= () => {
     const requestOptions2 = {
       method: "GET",
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json" },
+      credentials: "same-origin"
     }
     fetch("/data-access/user-profile-info", requestOptions2)
           .then(response => { if(response.status == 404) { newFunc();  

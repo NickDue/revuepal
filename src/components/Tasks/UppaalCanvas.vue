@@ -79,8 +79,8 @@
     </div>
   </div>
   <div class="button-container">
-    <TaskButton icon="fa-solid fa-check" text="Submit" @click="submitXml"/>
-    <TaskButton icon="fa-solid fa-forward" text="Skip" />
+    <button icon="fa-solid fa-check" class="btns" @click="submitXml">Submit</button>
+    <button icon="fa-solid fa-forward" class="btns" >Skip</button>
   </div>
 </template>
 
@@ -91,7 +91,6 @@ import TemporaryLink from "@/components/Tasks/UppaalElements/TemporaryLink";
 import StartLink from "@/components/Tasks/UppaalElements/StartLink";
 import Link from "@/components/Tasks/UppaalElements/Link";
 import SelfLink from "@/components/Tasks/UppaalElements/SelfLink";
-import TaskButton from "@/components/Tasks/TaskButton";
 export default {
   name: 'UppaalCanvas',
   props: {
@@ -129,9 +128,6 @@ export default {
       templateName: null,
       systemData: null,
     }
-  },
-  components: {
-    TaskButton
   },
   created() {
     let parser = new DOMParser()
@@ -523,5 +519,26 @@ button {
   color: white;
 }
 
+.btns {
+background-color: #4b4b4b;
+color: white;
+height: 40px;
+width: 100px;
+font-weight: 600;
+font-size: 12px;
+cursor: pointer;
+transition: 0.6s;
+border-radius: 4px;
+font-family: "Montserrat", sans-serif;
+margin-right: 7.5%;
+box-shadow: 0 0 4px 0 rgba(0,0,0.2);
+border: none;
+color: #6ddbb8;
+}
+
+.btns:hover {
+color: #6ddbb8;
+transition: 0.4s;
+}
 
 </style>

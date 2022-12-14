@@ -5,6 +5,7 @@
   <div>
     <button class="signOutBtn" @click="enterMenu">
     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" class="btnimg">   
+    <router-link :to="'/user/' + username"/>
   </button>
   </div>
 </template>
@@ -37,7 +38,7 @@ export default {
 
     enterMenu() {
       this.verifyUser();
-      
+      this.$router.push('/user/' + this.username)
     },
 
     verifyUser() {
@@ -45,6 +46,7 @@ export default {
         const requestOptions = {
         method: "GET",
         headers: { "Content-Type": "application/json" },
+        credentials: "same-origin"
         };
         fetch("/data-access/user-profile-info", requestOptions)
             .then(response => response.json())
