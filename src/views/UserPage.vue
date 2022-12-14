@@ -54,10 +54,11 @@ import ContentCard from "@/components/Personal/Content/ContentCard";
 .profile-container {
   display: flex;
   flex-direction: row;
-  height: 100%;
+  height: 600px;
   background-color: white;
   margin-top: 100px;
   overflow: none;
+ 
 }
 
 .sidebar-container {
@@ -66,11 +67,12 @@ import ContentCard from "@/components/Personal/Content/ContentCard";
   height: 70%;
   margin-right: 30px;
   overflow: auto;
-  border: 1px solid black;
-  box-shadow: 0 0 4px 0 rgba(0,0,0.2);
+  border: none;
+  box-shadow: 4px 4px 4px 0 rgba(0,0,0,0.2);
   margin-left: 30px;
   padding: 30px;
   background-color: #4b4b4b;
+  border-radius: 2px;
 }
 
 .main-content-container {
@@ -79,13 +81,13 @@ import ContentCard from "@/components/Personal/Content/ContentCard";
   height: 70%;
   margin-right: 30px;
   overflow: auto;
-  border: 1px solid black;
-  box-shadow: 0 0 4px 0 rgba(0,0,0.2);
   border: none;
   margin-left: 30px;
   padding: 30px;
   background-color: #4b4b4b;
   color: white;
+  box-shadow: 4px 4px 4px 0 rgba(0,0,0,0.2);
+  border-radius: 2px;
 }
 
 

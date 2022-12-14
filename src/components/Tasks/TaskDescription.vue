@@ -19,18 +19,18 @@ export default {
 .description-container {
   display: flex;
   flex-direction: column;
-  height: 180px;
+  height: 250px;
+  width: 1295px;
   box-shadow: 0 2px 4px 0 rgba(0,0,0.2);
   overflow-y: hidden;
   overflow-x: disabled;
-  background-color: #6ddbb8;
+  background-color: #4b4b4b;
   background-repeat: no-repeat;
   background-size: 100%;
-  width: 81.7%;
   margin: auto;
   color: white;
   padding: 30px;
-  padding-top: 0px;
+  margin-top: 50px;
   text-align: justify;
   box-shadow: 0 0 4px 0 rgba(0,0,0.2);
 }

@@ -1,8 +1,8 @@
 <template>
   <div class="loginBtnArea">
-    <button class="login" @click="$router.push({name: 'Create'})">Sign Up</button>
+    <button class="login" @click="$router.push({name: 'Create'})">SIGN UP</button>
     <GoogleLogin :callback="callback">
-      <button class="login">Login</button>
+      <button class="login">LOGIN</button>
     </GoogleLogin>
   </div>
   
@@ -56,21 +56,6 @@
 
 <style>
 
-.btnimg {
-  border-radius: 50%;
-  border: 2px solid white;
-  padding: 10%;
-  width: 25px;
-  height: 25px;
-  
-}
-
-.btnimg:hover{
-  border-color: #12ff94;
-  transition: 0.8s;
-  
-}
-
 .btntext {
   border: none;
   background-color: #4B4B4B;
@@ -90,28 +75,28 @@
   padding-right: 30px;
   padding-bottom: 7px;
   padding-top: 10px;
-  margin-left: 450px;
   
 }
 
 .login {
   background-color: #4b4b4b;
-  margin-right: 20px;
-  border-radius: 5px;
-  width: 70px;
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 10px;
-  background-color: #4b4b4b;
-  cursor: pointer;
   color: white;
+  height: 35px;
+  width: 100px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.6s;
+  border-radius: 4px;
+  font-family: "Montserrat", sans-serif;
+  margin-right: 7.5%;
   box-shadow: 0 0 4px 0 rgba(0,0,0.2);
+  border: none;
+  color: white;
 }
 
 .login:hover{
-  color: #42B983;
+  color: #6ddbb8;
   transition: 1s;
 }
 

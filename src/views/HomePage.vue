@@ -3,10 +3,10 @@
     <LogoBar/>   
   </div>
   <div class="img-container">
-    <SelectOptions class="select-imgs" filename="home-login.jpg" imgText="Sign Up Here"/>
-    <SelectOptions class="select-imgs" filename="home-github.jpg" imgText="REVUPPAAL Github"/>
-    <SelectOptions class="select-imgs" filename="home-docs.jpg" imgText="Learn more"/>
-  </div>
+    <SelectOptions class="select-imgs" filename="home-login.jpg" imgText="Sign Up Here" link="/data-access/create-user"/>
+    <SelectOptions class="select-imgs" filename="home-github.jpg" imgText="REVUPPAAL Github" link="/NickDue/revuepal" value="https://www.github.com"/>
+    <SelectOptions class="select-imgs" filename="home-docs.jpg" imgText="Learn more" link="/about"/>
+</div>
 </template>
 
 <script>

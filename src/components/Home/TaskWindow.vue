@@ -1,7 +1,7 @@
 <template>
   <div class="task-window">
     <div class="task-header">
-      <p>Your next challenge </p>
+      <p class="challenge">Your next challenge </p>
     </div>
     <div class="difficulty-select">
       <select name="difficulty" id="difficulty">
@@ -14,10 +14,10 @@
     </div>
     <div class="button-container">
       <button class="btn">
-        <router-link class="btn" :to="'/task/'+ex_id">Train</router-link>
+        <router-link class="btnlink" :to="'/task/'+ex_id">TRAIN</router-link>
       </button>
       <button class="btn" @click="skipToNextExercise">
-        Skip
+        SKIP
       </button>
     </div>
   </div>
@@ -82,7 +82,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-content: flex-start;
-  height: 200px;
+  height: 230px;
   margin-left: 20px;
   margin-top: 10px;
   margin-bottom: 3px;
@@ -94,22 +94,37 @@ export default {
 }
 
 .btn {
-  height: 30px;
-  width: 80px;
-  border-radius: 4px;
-  position: relative;
-  cursor: pointer;
-  font-family: "Monserrat", sans-serif;
-  background-color: #4b4b4b;
+  background-color: rgba(53, 53, 49, 0.954);
   color: white;
+  height: 40px;
+  width: 100px;
+  font-weight: 600;
   font-size: 12px;
-  transition: 0.6s;
+  cursor: pointer;
+  border-radius: 4px;
+  font-family: "Montserrat", sans-serif;
+  margin-right: 7.5%;
+  border: none;
+  color: white;
   text-decoration: none;
+  transition: 1s;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+}
+
+.btnlink {
+  text-decoration: none;
+  color: white;
+}
+
+.btnlink:hover {
+  text-decoration: none;
+  color: #6ddbb8;
+  transition: 1s;
 }
 
 .btn:hover {
 color: #6ddbb8;
-transition: 0.4s;
+transition: 1s;
 }
 .button-container {
   display: flex;
@@ -130,6 +145,7 @@ p {
 
 .difficulty-select {
   margin-top: 10px;
+  
 }
 
 #difficulty {
@@ -138,8 +154,19 @@ p {
   width: 100%;
   margin: 0 auto;
   font-size: 18px;
-  border-radius: 15px;
-  background-color: #6ddbb8;
+  border-radius: 5px;
+  background-color: white;
+  font-family: "Montserrat", sans-serif;
+  padding-left: 6px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.challenge {
+  color: #6ddbb8;
+  font-weight: 600;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .description-container {

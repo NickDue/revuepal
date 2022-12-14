@@ -1,6 +1,11 @@
 <template>
     <div>
-    <img :src="require(`@/assets/img/${filename}`)" class="im">
+    <router-link :to="{
+        path: link,
+        beforeEnter(){
+            location.href=value
+        }    
+    }"><img :src="require(`@/assets/img/${filename}`)" class="im"></router-link>
     
     <p>{{ imgText }}</p>
     </div>
@@ -16,6 +21,16 @@ export default {
             },
 
             imgText: {
+                type: String,
+                default: ""
+            },
+
+            link: {
+                type: String,
+                default: ""
+            },
+
+            value: {
                 type: String,
                 default: ""
             }

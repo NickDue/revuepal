@@ -31,7 +31,8 @@
   .task-container {
     display: flex;
     justify-content: space-between;
-    border: 1px solid black;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+    border: none;
     width: 100%;
     border-radius: 5px;
     overflow: auto;

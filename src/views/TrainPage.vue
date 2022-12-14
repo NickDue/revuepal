@@ -4,7 +4,7 @@
       <TaskDescription :description=description :exerciseName=exerciseName />
     </div>
     <div>
-      <UppaalCanvas :task-id=taskid />
+      <UppaalCanvas class="canvas" :task-id=taskid />
     </div>
   </div>
 </template>
@@ -52,5 +52,9 @@ export default {
 
 .tds {
   margin-top: 60px;
+}
+
+.canvas {
+  width: 500px;
 }
 </style>

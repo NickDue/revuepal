@@ -25,8 +25,8 @@ export default {
   width: 40%;
   display: flex;
   margin: auto;
-  border: 2px solid #6ddbb8;
-  box-shadow: 0 0 4px 0 rgba(0,0,0.2);
+  border: 3px solid #6ddbb8;
+  box-shadow: 0 2px 4px 0 rgba(51, 200, 140, 0.2);
   margin-bottom: 10px;
   background-color: white;
 }

@@ -43,7 +43,7 @@
             Committed
           </h5>
         </div>
-        <button @click="saveOptionsForObject">
+        <button class="btns2" @click="saveOptionsForObject">
           Save
         </button>
       </div>
@@ -72,16 +72,23 @@
           </h5>
           <textarea id="item-update" class="input-texts is-link" rows="5" v-model="update"></textarea>
         </div>
-        <button @click="saveOptionsForObject">
+        <button class="btns2" @click="saveOptionsForObject">
           Save
         </button>
       </div>
     </div>
+    
+    
+
+
+    
   </div>
   <div class="button-container">
-    <button icon="fa-solid fa-check" class="btns" @click="submitXml">Submit</button>
-    <button icon="fa-solid fa-forward" class="btns" >Skip</button>
+    <button class="btns" @click="submitXml">Submit</button>
+    <button class="btns">Skip</button>
+
   </div>
+
 </template>
 
 <script>
@@ -453,12 +460,12 @@ export default {
 
 .optionsContainer {
   display: block;
-  border: 1px solid black;
-  width: 20%;
+  border: none;
+  width: 330px;
   height: 500px;
   margin-left: 20px;
   box-shadow: 0 2px 4px 0 rgba(0,0,0.2);
-  background-color: white;
+  background-color: #6ddbb8
 }
 
 h4 {
@@ -487,6 +494,7 @@ h5 {
 #myCanvas {
   border: 1px solid black;
   box-shadow: 0 2px 4px 0 rgba(0,0,0.2);
+  width: 1000px
 }
 
 .input-texts {
@@ -513,6 +521,7 @@ button {
   position: relative;
   display: flex;
   justify-content: flex-end;
+  width: 2000px;
 
 }
 
@@ -532,15 +541,38 @@ cursor: pointer;
 transition: 0.6s;
 border-radius: 4px;
 font-family: "Montserrat", sans-serif;
-margin-right: 7.5%;
+margin-right: 90px;
 box-shadow: 0 0 4px 0 rgba(0,0,0.2);
 border: none;
 color: #6ddbb8;
 }
 
 .btns:hover {
+color: white;
+transition: 1s;
+}
+
+.btns2 {
+background-color: #4b4b4b;
+color: white;
+height: 20px;
+width: 50px;
+font-weight: 600;
+font-size: 10px;
+cursor: pointer;
+transition: 0.6s;
+border-radius: 4px;
+font-family: "Montserrat", sans-serif;
+margin-right: 90px;
+box-shadow: 0 0 4px 0 rgba(0,0,0.2);
+border: none;
 color: #6ddbb8;
-transition: 0.4s;
+margin-left: 50px;
+}
+
+.btns2:hover {
+color: white;
+transition: 1s;
 }
 
 </style>

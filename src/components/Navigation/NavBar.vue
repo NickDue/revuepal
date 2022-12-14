@@ -1,33 +1,39 @@
 <template>
   <div class="navContainer">
-    <ruLogo/>
-    <NavBarItem
-        name="HOME"
-        route="/"
-    />
-    <NavBarItem v-if="isLoggedIn === true"
-        name="TRAIN"
-        route="/select"
-    />
+    <div class="logo">
+      <ruLogo/>
+    </div>
+    <div class="navs">
+      <NavBarItem
+          name="HOME"
+          route="/"
+      />
+      <NavBarItem v-if="isLoggedIn === true"
+          name="TRAIN"
+          route="/select"
+      />
 
-    <NavBarItem v-if="isLoggedIn === false"
-        name="TRAIN"
-        route="/data-access/create-user"
-    />
-    <NavBarItem v-if="isLoggedIn === true"
-        name="LEADERBOARDS"
-        route="/leaderboards"
-    />
-    <NavBarItem v-if="isLoggedIn === false"
-        name="LEADERBOARDS"
-        route="/data-access/create-user"
-    />
-    <NavBarItem
-        name="ABOUT"
-        route="/about"
-    />
+      <NavBarItem v-if="isLoggedIn === false"
+          name="TRAIN"
+          route="/data-access/create-user"
+      />
+      <NavBarItem v-if="isLoggedIn === true"
+          name="LEADERBOARDS"
+          route="/leaderboards"
+      />
+      <NavBarItem v-if="isLoggedIn === false"
+          name="LEADERBOARDS"
+          route="/data-access/create-user"
+      />
+      <NavBarItem
+          name="ABOUT"
+          route="/about"
+      />
+    </div>
+    <div class="auth">
     <LoggedOut @logsin="logsin" @getUsername="getUsername" @redirect="redirect()" v-if="isLoggedIn === false"/>
     <LoggedIn @logsout="logsin" v-if="isLoggedIn === true"/>
+    </div>
   </div>
 </template>
 
@@ -41,7 +47,7 @@ export default {
   name: 'NavBar',
   data() {
     return {
-      isLoggedIn: false,
+      isLoggedIn: true,
       username: ""
     }
   },
@@ -75,10 +81,8 @@ export default {
 .navContainer {
   min-width: 100%;
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   position: fixed;
   top: 0;
   left: 0;
@@ -87,6 +91,29 @@ export default {
   background-color: #4B4B4B;
   box-shadow: 0 2px 4px 0 rgba(0,0,0.2);
   
+}
+
+.logo {
+  top: 0;
+  display: flex;
+  left: 0;
+  height: 75px;
+  width: 220px;
+}
+
+.auth {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.navs {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
 }
 
 </style>

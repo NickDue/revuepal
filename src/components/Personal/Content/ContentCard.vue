@@ -22,7 +22,7 @@ export default {
 .card-header {
   display: flex;
   justify-content: center;
-  align-content: stretch;
+  top: 10;
   margin-top: 10px;
   margin-bottom: 10px;
 }

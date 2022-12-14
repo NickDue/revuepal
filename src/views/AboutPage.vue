@@ -1,4 +1,5 @@
 <template>
+  <div class="aboutContainer">
   <div class="flex-container">
     <div class="flex-left">
       <h1 class="headline">ABOUT</h1>
@@ -33,7 +34,7 @@
       <h1 class="headline">GITHUB</h1>
       <hr class="underline2">
       <p>REVUPPAAL is an open source assessment tool, and the code is therefore available on GITHUB.
-        Follow the link below in order to view it.
+        Follow the link below for more info.
       </p>
       <button class="btn">GITHUB</button>
       </div>
@@ -52,6 +53,7 @@
       <p><b>revuppaal@gmail.com</b></p>
     </div>
   </div>
+</div>
 
   
 </template>
@@ -73,20 +75,21 @@ height: 400px;
 }
 
 .btn {
-background-color: #4b4b4b;
-color: white;
-border: 2px solid #6ddbb8;
-height: 40px;
-width: 100px;
-font-weight: 600;
-font-size: 12px;
-cursor: pointer;
-transition: 0.6s;
-align-items: center;
-vertical-align: bottom;
-bottom:10%;
-margin-left: 5%;
-margin-top: 5%;
+  background-color: #4b4b4b;
+  color: white;
+  height: 40px;
+  width: 100px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.6s;
+  border-radius: 4px;
+  font-family: "Montserrat", sans-serif;
+  margin-right: 7.5%;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+  border: none;
+  color: white;
+  margin-top: 30px;
 
 }
 
@@ -95,9 +98,14 @@ color: #6ddbb8;
 transition: 0.4s;
 }
 
+.aboutContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .image {
-height: 100%;
-width: 40%;
 opacity: 100%;
 }
 .underline {
@@ -110,7 +118,7 @@ margin: 0px;
 .underline2 {
 width: 50%;
 height: 3px;
-background-color: black;
+background-color: white;
 border: none;
 margin: 0px;
 overflow: hidden;
@@ -120,16 +128,17 @@ overflow: hidden;
 text-align: left;
 margin: 10px;
 font-weight: 700;
+color: white;
 }
 
 .flex-left {
-width: 33%;
+width: 535px;
 background-color: #4b4b4b;
 text-align: justify;
 padding: 30px;
 padding-left: 100px;
 padding-right: 100px;
-box-shadow: 0 0 4px 0 rgba(0,0,0.2);
+box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
 border: none;
 overflow-y: scroll;
 scrollbar-width: none; /* Firefox */
@@ -139,12 +148,12 @@ scrollbar-width: none; /* Firefox */
 
 .flex-right {
 display: flex;
-box-shadow: 0 0px 4px 0 rgba(0,0,0.2);
+box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
 background-color: #4b4b4b;
 justify-content: center;
 align-items: center;
 height: auto;
-width: 30%;
+width: 600px;
 
 }
 
@@ -162,14 +171,14 @@ margin: auto;
 }
 
 .bBox {
-border: 1px solid black;
+border: none;
 padding: 40px;
 margin: 50px;
-width: 318px;
+width: 300px;
 height: 230px;
 background-color: #6ddbb8;
 box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
-color: black;
+color: white;
 text-align: justify;
 display: table;
 }

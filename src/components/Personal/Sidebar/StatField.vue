@@ -29,6 +29,7 @@ export default {
   justify-content: space-between;
   flex-grow: 1;
   margin: auto;
+  border: none;
 }
 .stats-item {
   margin: 3px;

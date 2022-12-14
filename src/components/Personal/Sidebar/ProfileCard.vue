@@ -5,7 +5,7 @@
     </div>
     <div class="stats-main">
       <StatField stat-name="Total Score" :stat-value=score />
-      <StatField stat-name="# Completed" :stat-value=completedExercises />
+      <StatField stat-name="Completed" :stat-value=completedExercises />
       <StatField stat-name="Created" :stat-value=createdAt />
     </div>
   </div>
@@ -38,11 +38,13 @@ export default {
   margin-left: 10px;
   margin-top: 10px;
   margin-right: 10px;
+  margin-bottom: 20px;
   column-gap: 2px;
-  box-shadow: 0 0 3px 0 rgba(0,0,0.2);
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
   background-color: #575555;
   color: white;
   padding: 30px;
+  border: none;
 }
 
 .wrapper2 {

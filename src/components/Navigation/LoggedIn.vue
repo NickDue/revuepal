@@ -1,6 +1,6 @@
 <template>
   <button class="btn" @click="logoutUser(); logOut()">
-      Logout
+      LOGOUT
     </button>
   <div>
     <button class="signOutBtn" @click="enterMenu">
@@ -88,18 +88,19 @@ export default {
 
 .btn {
   background-color: #4b4b4b;
-  margin-right: 20px;
-  border-radius: 5px;
-  width: 70px;
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 10px;
-  background-color: #4b4b4b;
-  cursor: pointer;
   color: white;
+  height: 35px;
+  width: 90px;
+  font-weight: 600;
+  font-size: 11px;
+  cursor: pointer;
+  transition: 0.6s;
+  border-radius: 4px;
+  margin-right: 20px;
+  font-family: "Montserrat", sans-serif;
   box-shadow: 0 0 4px 0 rgba(0,0,0.2);
+  border: none;
+  color: white;
 }
 
 .signOutBtn {
@@ -117,13 +118,13 @@ export default {
   display: flex;
   outline: none;
   cursor: pointer;
-  border: 2px solid white;
+  border: 3px solid white;
   box-shadow: 0 0 4px 0 rgba(0,0,0.2);
 }
 
 .btnimg:hover{
-  color: #6ddbb8;
-  border: 2px solid #6ddbb8;
+  border: 3px solid #6ddbb8;
+  background-color: #6ddbb8;
   transition: 1s;
 }
 
